@@ -20,7 +20,7 @@
             "text": "TP_Final Export"
           },
           "specification": {
-            "text": "@EventDriven\n@SuperSteps(no)\n\ninterface: \n    in event EV_BTN_MENU_DOWN\n    in event EV_BTN_MENU_UP\n    in event EV_BTN_AUTO_DEBAJO_DOWN\n    in event EV_BTN_AUTO_DEBAJO_UP\n    in event EV_BTN_NEXT_DOWN\n    in event EV_BTN_NEXT_UP\n    in event EV_BTN_ENTER_DOWN\n    in event EV_BTN_ENTER_UP\n    in event EV_BTN_ACCIONAR_PORTON_DOWN\n    in event EV_BTN_ACCIONAR_PORTON_UP\n    \ninternal:\n    const submenu_max: integer = 3\n    const TICK_MAX: integer = 1\n    const TMPO_ESPERA_MAX: integer = 1\n    const TMPO_DEBAJO_MAX: integer = 1\n    \n    var submenu: integer\n    var tmpo_espera: integer\n    var tmpo_debajo: integer\n    var tick: integer\n    var abriendo:boolean\n    var auto_debajo:boolean = false\n    \n//systema\n    event EV_SYS_MENU\n    event EV_SYS_ACCIONAR_PORTON\n    event EV_SYS_ENTER\n    event EV_SYS_NEXT\n    event EV_SYS_AUTO_DEBAJO\n    \n//actuadores\n    event EV_ACT_ABRIENDO_ON\n    event EV_ACT_ABRIENDO_OFF\n    event EV_ACT_CERRANDO_ON\n    event EV_ACT_CERRANDO_OFF\n    event EV_ACT_COMPLETAMENTE_CERRADO_ON\n    event EV_ACT_COMPLETAMENTE_CERRADO_OFF"
+            "text": "@EventDriven\n@SuperSteps(no)\n\ninterface: \n    in event EV_BTN_MENU_DOWN\n    in event EV_BTN_MENU_UP\n    in event EV_BTN_AUTO_DEBAJO_DOWN\n    in event EV_BTN_AUTO_DEBAJO_UP\n    in event EV_BTN_NEXT_DOWN\n    in event EV_BTN_NEXT_UP\n    in event EV_BTN_ENTER_DOWN\n    in event EV_BTN_ENTER_UP\n    in event EV_BTN_ACCIONAR_PORTON_DOWN\n    in event EV_BTN_ACCIONAR_PORTON_UP\n    \ninternal:\n    const submenu_max: integer = 3\n    const TICK_MAX: integer = 1\n    const TMPO_ESPERA_MAX: integer = 1\n    const TMPO_DEBAJO_MAX: integer = 1\n    \n    var submenu: integer\n    var tmpo_espera: integer\n    var tmpo_debajo: integer\n    var tick: integer\n    var abriendo:boolean\n    var auto_debajo:boolean = false\n    \n//systema\n    event EV_SYS_MENU\n    event EV_SYS_ACCIONAR_PORTON\n    event EV_SYS_ENTER\n    event EV_SYS_NEXT\n    event EV_SYS_AUTO_DEBAJO_ON\n    event EV_SYS_AUTO_DEBAJO_OFF\n    \n//actuadores\n    event EV_ACT_ABRIENDO_ON\n    event EV_ACT_ABRIENDO_OFF\n    event EV_ACT_CERRANDO_ON\n    event EV_ACT_CERRANDO_OFF\n    event EV_ACT_COMPLETAMENTE_CERRADO_ON\n    event EV_ACT_COMPLETAMENTE_CERRADO_OFF"
           }
         }
       },
@@ -248,6 +248,7 @@
         "parent": "1f0aa6a5-30d9-4998-a2e6-3a672b30c89b",
         "attrs": {
           "label": {
+            "fill": "#333333",
             "refX": "50%",
             "textAnchor": "middle",
             "refY": "50%",
@@ -1015,6 +1016,7 @@
         "parent": "e24fcbfc-ce94-4281-95b3-6bd4e970fee3",
         "attrs": {
           "label": {
+            "fill": "#333333",
             "refX": "50%",
             "textAnchor": "middle",
             "refY": "50%",
@@ -1781,6 +1783,7 @@
         "parent": "e9598112-1492-4033-bb38-e7d4e08da1a8",
         "attrs": {
           "label": {
+            "fill": "#333333",
             "refX": "50%",
             "textAnchor": "middle",
             "refY": "50%",
@@ -2531,6 +2534,7 @@
         "parent": "efd5879c-004c-4b04-9f64-ed3a8cf9e5cf",
         "attrs": {
           "label": {
+            "fill": "#333333",
             "refX": "50%",
             "textAnchor": "middle",
             "refY": "50%",
@@ -2772,7 +2776,7 @@
           {
             "attrs": {
               "text": {
-                "text": "EV_BTN_AUTO_DEBAJO_DOWN [tick == 0 && auto_debajo == true]\n/  auto_debajo = false"
+                "text": "EV_BTN_AUTO_DEBAJO_DOWN [tick == 0 && auto_debajo == true]\n/  auto_debajo = false;\nraise EV_SYS_AUTO_DEBAJO_OFF"
               }
             },
             "position": {
@@ -2827,7 +2831,7 @@
           {
             "attrs": {
               "text": {
-                "text": "EV_BTN_AUTO_DEBAJO_DOWN [tick == 0 && auto_debajo == false]\n/  auto_debajo = true;\n    raise EV_SYS_AUTO_DEBAJO"
+                "text": "EV_BTN_AUTO_DEBAJO_DOWN [tick == 0 && auto_debajo == false]\n/  auto_debajo = true;\n    raise EV_SYS_AUTO_DEBAJO_ON"
               }
             },
             "position": {
@@ -3145,2105 +3149,12 @@
       {
         "type": "Region",
         "position": {
-          "x": -5017,
-          "y": -1561.4999389648438
-        },
-        "size": {
-          "width": 4712,
-          "height": 1552
-        },
-        "angle": 0,
-        "fixedRatio": false,
-        "embedable": true,
-        "linkable": true,
-        "id": "6e82437d-7cb7-4393-928d-b844bce30d17",
-        "z": 2580,
-        "embeds": [
-          "0d258f19-8532-4b9a-a0b3-4cd7bf2b0b45",
-          "3bccd32c-58e1-4bb5-9024-dc4c78648002",
-          "35e6b580-81b1-4727-89bf-428d96d70066",
-          "0f4b0a04-0eb0-4333-a08c-ec9284e33e17",
-          "8f4c816a-29cd-42dc-9c60-2287f7a616ef",
-          "82887126-7e2f-44d3-82f7-afb9063fef2f"
-        ],
-        "attrs": {
-          "priority": {
-            "text": 1
-          },
-          "name": {
-            "text": "interactive_menu"
-          }
-        }
-      },
-      {
-        "type": "State",
-        "position": {
-          "x": -4461.025131225586,
-          "y": -1264.3749446868896
-        },
-        "size": {
-          "width": 1369.025131225586,
-          "height": 1081
-        },
-        "angle": 0,
-        "fixedRatio": false,
-        "embedable": true,
-        "linkable": true,
-        "id": "0f4b0a04-0eb0-4333-a08c-ec9284e33e17",
-        "z": 2581,
-        "parent": "6e82437d-7cb7-4393-928d-b844bce30d17",
-        "embeds": [
-          "e667c0e5-ce25-439a-941c-d8f8a1136c74"
-        ],
-        "attrs": {
-          "name": {
-            "text": "ST_MODO_NORMAL",
-            "fill": "#555555",
-            "fontSize": 12
-          }
-        }
-      },
-      {
-        "type": "State",
-        "position": {
-          "x": -2420,
-          "y": -1224.4999389648438
-        },
-        "size": {
-          "width": 1674,
-          "height": 1041.124994277954
-        },
-        "angle": 0,
-        "fixedRatio": false,
-        "embedable": true,
-        "linkable": true,
-        "id": "8f4c816a-29cd-42dc-9c60-2287f7a616ef",
-        "z": 2582,
-        "embeds": [
-          "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d"
-        ],
-        "parent": "6e82437d-7cb7-4393-928d-b844bce30d17",
-        "attrs": {
-          "name": {
-            "text": "ST_MODO_SETUP",
-            "fill": "#555555",
-            "fontSize": 12
-          }
-        }
-      },
-      {
-        "type": "Entry",
-        "position": {
-          "x": -4558.986110687256,
-          "y": -1496.4999389648438
-        },
-        "size": {
-          "height": 15,
-          "width": 15
-        },
-        "angle": 0,
-        "fixedRatio": true,
-        "embedable": false,
-        "linkable": true,
-        "entryKind": "Initial",
-        "id": "82887126-7e2f-44d3-82f7-afb9063fef2f",
-        "markup": "\n    <g class=\"scalable default-outline\" stroke-linejoin=\"round\">\n      <circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#000000\"/>\n      <text font-family=\"FontAwesome\" font-size=\"13\" x=\"-5\" y=\"0\" opacity=\"0\" fill=\"#00ff00\" text=\"\"/>\n    </g>\n  ",
-        "z": 2583,
-        "parent": "6e82437d-7cb7-4393-928d-b844bce30d17",
-        "embeds": [
-          "d28b13b8-9045-4a23-875b-386fc7aa4dfa"
-        ],
-        "attrs": {
-          "name": {
-            "fill": "#555555"
-          }
-        }
-      },
-      {
-        "type": "Region",
-        "position": {
-          "x": -4460.025131225586,
-          "y": -1242.5780696868896
-        },
-        "size": {
-          "width": 1367.025131225586,
-          "height": 1058.203125
-        },
-        "angle": 0,
-        "fixedRatio": false,
-        "embedable": true,
-        "linkable": true,
-        "id": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
-        "z": 2587,
-        "embeds": [
-          "d3446726-0fc2-4d88-829b-f06314aa921d",
-          "41e86145-d89d-4e9e-b59f-ddfd14b4ea24",
-          "44560611-2d0c-4225-8f86-4d7742ca29d7",
-          "2eb8fade-ba37-4532-a821-a634a4ec460f",
-          "3485f5fc-ef93-45de-9160-ee895b72455b",
-          "1ca7ed51-923f-4dcf-a35a-55bd6713330c",
-          "d26adc4a-a530-4f75-a9ac-44e7f85ff76c",
-          "2b30eb57-e2c2-4f46-9520-9aaca0dd303b",
-          "bd909b94-eb44-4c25-9039-d3c580c0952c",
-          "02db73d2-8a67-4681-afc1-2e177e1528b7",
-          "8a66df1d-1c33-4135-bb11-634a2edc20b6",
-          "bfcaec29-6c86-413c-bf36-d477c7e766af",
-          "9dd97b1b-86cf-4354-92ab-f506da620b0b",
-          "5088e524-977a-43a6-ab4d-1cfa83ed41e0",
-          "f7315f39-6fc6-4ae4-a120-cc70502967ad",
-          "6359ab2c-34c0-4118-bc52-054eabedc8a6",
-          "58ac61db-d713-45a4-b6c7-2f558d1aa4dd"
-        ],
-        "parent": "0f4b0a04-0eb0-4333-a08c-ec9284e33e17",
-        "attrs": {}
-      },
-      {
-        "type": "Region",
-        "position": {
-          "x": -2419,
-          "y": -1202.7030639648438
-        },
-        "size": {
-          "width": 1672,
-          "height": 1018.3281192779541
-        },
-        "angle": 0,
-        "fixedRatio": false,
-        "embedable": true,
-        "linkable": true,
-        "id": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
-        "z": 2588,
-        "embeds": [
-          "2bf14f02-a9c0-4d36-a32b-5db321c21f52",
-          "5eb87323-b9e5-4b62-8e8c-a4eae2af4687",
-          "e8bdce38-ea9f-4f26-a5dc-ecce46407552",
-          "42ae8579-f7c1-4d50-b81f-8841787c5b8c",
-          "4bdf86dc-2012-437f-90fa-8b0047a8cd21",
-          "6ace7a9c-3b4a-4e37-b7a6-44830df0b005",
-          "f78a822c-e00c-4e71-9dcf-1204648f50aa",
-          "a217add9-69cb-4a16-a4f8-548ec34fe767",
-          "3ea82168-f16d-4d13-9dd6-31e551afb05a",
-          "c6a4d30a-0807-4f4d-95c3-65a0e3eff115"
-        ],
-        "parent": "8f4c816a-29cd-42dc-9c60-2287f7a616ef",
-        "attrs": {}
-      },
-      {
-        "type": "NodeLabel",
-        "label": true,
-        "size": {
-          "width": 15,
-          "height": 15
-        },
-        "position": {
-          "x": -4558.986110687256,
-          "y": -1481.4999389648438
-        },
-        "id": "d28b13b8-9045-4a23-875b-386fc7aa4dfa",
-        "z": 2589,
-        "parent": "82887126-7e2f-44d3-82f7-afb9063fef2f",
-        "attrs": {
-          "label": {
-            "refX": "50%",
-            "textAnchor": "middle",
-            "refY": "50%",
-            "textVerticalAnchor": "middle"
-          }
-        }
-      },
-      {
-        "type": "State",
-        "position": {
-          "x": -3757,
-          "y": -916.4999389648438
-        },
-        "size": {
-          "width": 151.234375,
-          "height": 131.59375
-        },
-        "angle": 0,
-        "fixedRatio": false,
-        "embedable": true,
-        "linkable": true,
-        "id": "8a66df1d-1c33-4135-bb11-634a2edc20b6",
-        "z": 2590,
-        "embeds": [
-          "980fec10-1018-48cd-a059-e45c49f92453"
-        ],
-        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
-        "attrs": {
-          "name": {
-            "text": "ST_PORTON_ABRIENDO",
-            "fill": "#555555",
-            "fontSize": 12
-          }
-        }
-      },
-      {
-        "type": "State",
-        "position": {
-          "x": -3744.8828125,
-          "y": -719.5780696868896
-        },
-        "size": {
-          "width": 127,
-          "height": 103.5
-        },
-        "angle": 0,
-        "fixedRatio": false,
-        "embedable": true,
-        "linkable": true,
-        "id": "bfcaec29-6c86-413c-bf36-d477c7e766af",
-        "z": 2591,
-        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
-        "attrs": {
-          "name": {
-            "text": "ST_PORTON_FRENADO",
-            "fill": "#555555",
-            "fontSize": 12
-          }
-        }
-      },
-      {
-        "type": "State",
-        "position": {
-          "x": -3797.8828125,
-          "y": -455.87494468688965
-        },
-        "size": {
-          "width": 180,
-          "height": 132.59375
-        },
-        "angle": 0,
-        "fixedRatio": false,
-        "embedable": true,
-        "linkable": true,
-        "id": "9dd97b1b-86cf-4354-92ab-f506da620b0b",
-        "z": 2592,
-        "embeds": [
-          "b029b3c9-a88b-4fac-871a-d422e45334ee"
-        ],
-        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
-        "attrs": {
-          "name": {
-            "text": "ST_PORTON_CERRANDO",
-            "fill": "#555555",
-            "fontSize": 12
-          }
-        }
-      },
-      {
-        "type": "Entry",
-        "position": {
-          "x": -4388.011241912842,
-          "y": -711.4374418258667
-        },
-        "size": {
-          "height": 15,
-          "width": 15
-        },
-        "angle": 0,
-        "fixedRatio": true,
-        "embedable": false,
-        "linkable": true,
-        "entryKind": "Initial",
-        "id": "5088e524-977a-43a6-ab4d-1cfa83ed41e0",
-        "z": 2593,
-        "markup": "\n    <g class=\"scalable default-outline\" stroke-linejoin=\"round\">\n      <circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#000000\"/>\n      <text font-family=\"FontAwesome\" font-size=\"13\" x=\"-5\" y=\"0\" opacity=\"0\" fill=\"#00ff00\" text=\"\"/>\n    </g>\n  ",
-        "embeds": [
-          "ae0cf90e-407a-43fa-a1f4-7aa39a37f6cc"
-        ],
-        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
-        "attrs": {
-          "name": {
-            "fill": "#555555"
-          }
-        }
-      },
-      {
-        "type": "State",
-        "position": {
-          "x": -4267.025131225586,
-          "y": -770.6874418258667
-        },
-        "size": {
-          "width": 157,
-          "height": 133.5
-        },
-        "angle": 0,
-        "fixedRatio": false,
-        "embedable": true,
-        "linkable": true,
-        "id": "f7315f39-6fc6-4ae4-a120-cc70502967ad",
-        "z": 2594,
-        "embeds": [],
-        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
-        "attrs": {
-          "name": {
-            "text": "ST_PORTON_CERRADO",
-            "fill": "#555555",
-            "fontSize": 12
-          }
-        }
-      },
-      {
-        "type": "Note",
-        "position": {
-          "x": -3446,
-          "y": -1158.4999389648438
-        },
-        "size": {
-          "width": 333,
-          "height": 104
-        },
-        "angle": 0,
-        "linkable": false,
-        "id": "6359ab2c-34c0-4118-bc52-054eabedc8a6",
-        "z": 2595,
-        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
-        "attrs": {
-          "label": {
-            "text": "SI NO ES CON EL TICK SE PUEDE HACER CON\n(AFTER X SECONDS)\nLA IDEA ES QUE SI NO SE LLEGA A ABRIR Y TOCO\nDE NUEVO EL BOTON, SE FRENA"
-          }
-        }
-      },
-      {
-        "type": "State",
-        "position": {
-          "x": -3296,
-          "y": -892.4999389648438
-        },
-        "size": {
-          "width": 134,
-          "height": 102
-        },
-        "angle": 0,
-        "fixedRatio": false,
-        "embedable": true,
-        "linkable": true,
-        "id": "58ac61db-d713-45a4-b6c7-2f558d1aa4dd",
-        "z": 2604,
-        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
-        "attrs": {
-          "name": {
-            "text": "ST_PORTON_ABIERTO",
-            "fill": "#555555",
-            "fontSize": 12
-          }
-        }
-      },
-      {
-        "type": "Note",
-        "position": {
-          "x": -2215.5,
-          "y": -1015.4999389648438
-        },
-        "size": {
-          "width": 607.703125,
-          "height": 60
-        },
-        "angle": 0,
-        "linkable": false,
-        "id": "6ace7a9c-3b4a-4e37-b7a6-44830df0b005",
-        "z": 2607,
-        "parent": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
-        "attrs": {
-          "label": {
-            "text": "TIENE DOS PARAMETROS CONFIGURABLES\nTIEMPO DE ESPERA, Y TIEMPO DE PERMANENCIA (Antes de que empiece a sonar la alarma?)\nPODRÍA SETEARSE UN MINIMO PARA AMBOS (Por ahora dejo 0)"
-          }
-        }
-      },
-      {
-        "type": "State",
-        "position": {
-          "x": -1591.4166641235352,
-          "y": -790.4999389648438
-        },
-        "size": {
-          "width": 171.8333282470703,
-          "height": 88.375
-        },
-        "angle": 0,
-        "fixedRatio": false,
-        "embedable": true,
-        "linkable": true,
-        "id": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
-        "z": 2608,
-        "embeds": [
-          "5dc1ee54-955a-442b-bb0d-ce8cfdce8e5b",
-          "f5dc0d2b-4a3f-4d2d-8289-35d92175e0ab"
-        ],
-        "parent": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
-        "attrs": {
-          "name": {
-            "text": "Menú 2",
-            "fill": "#555555",
-            "fontSize": 12
-          }
-        }
-      },
-      {
-        "type": "Entry",
-        "position": {
-          "x": -1489.6944580078125,
-          "y": -1015.4999389648438
-        },
-        "size": {
-          "height": 15,
-          "width": 15
-        },
-        "angle": 0,
-        "fixedRatio": true,
-        "embedable": false,
-        "linkable": true,
-        "entryKind": "Initial",
-        "id": "a217add9-69cb-4a16-a4f8-548ec34fe767",
-        "z": 2609,
-        "markup": "\n    <g class=\"scalable default-outline\" stroke-linejoin=\"round\">\n      <circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#000000\"/>\n      <text font-family=\"FontAwesome\" font-size=\"13\" x=\"-5\" y=\"0\" opacity=\"0\" fill=\"#00ff00\" text=\"\"/>\n    </g>\n  ",
-        "embeds": [
-          "5d98b5f9-217d-4411-92b1-19f6788644d4"
-        ],
-        "parent": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
-        "attrs": {
-          "name": {
-            "fill": "#555555"
-          }
-        }
-      },
-      {
-        "type": "State",
-        "position": {
-          "x": -1922,
-          "y": -520.9999389648438
-        },
-        "size": {
-          "width": 143.02777862548828,
-          "height": 130
-        },
-        "angle": 0,
-        "fixedRatio": false,
-        "embedable": true,
-        "linkable": true,
-        "id": "3ea82168-f16d-4d13-9dd6-31e551afb05a",
-        "z": 2610,
-        "embeds": [
-          "6ded51d0-302d-4cb3-8e65-03e64d70e048",
-          "32b6c883-ba5c-4d2d-857c-448b9bf461f1"
-        ],
-        "parent": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
-        "attrs": {
-          "name": {
-            "text": "Menú 3 - Power",
-            "fill": "#555555",
-            "fontSize": 12
-          },
-          "specification": {
-            "text": "\n"
-          }
-        }
-      },
-      {
-        "type": "State",
-        "position": {
-          "x": -1249,
-          "y": -566.4999389648438
-        },
-        "size": {
-          "width": 147,
-          "height": 199.3333282470703
-        },
-        "angle": 0,
-        "fixedRatio": false,
-        "embedable": true,
-        "linkable": true,
-        "id": "c6a4d30a-0807-4f4d-95c3-65a0e3eff115",
-        "z": 2611,
-        "embeds": [
-          "e7bca249-4404-404c-a505-a07725ea8c03",
-          "ab845f2a-cc6e-451d-9092-c0a38baf1fe7"
-        ],
-        "parent": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
-        "attrs": {
-          "name": {
-            "text": "Menú 3 - Spin",
-            "fill": "#555555",
-            "fontSize": 12
-          }
-        }
-      },
-      {
-        "type": "NodeLabel",
-        "label": true,
-        "size": {
-          "width": 15,
-          "height": 15
-        },
-        "position": {
-          "x": -4388.011241912842,
-          "y": -696.4374418258667
-        },
-        "id": "ae0cf90e-407a-43fa-a1f4-7aa39a37f6cc",
-        "z": 2619,
-        "parent": "5088e524-977a-43a6-ab4d-1cfa83ed41e0",
-        "attrs": {
-          "label": {
-            "refX": "50%",
-            "textAnchor": "middle",
-            "refY": "50%",
-            "textVerticalAnchor": "middle"
-          }
-        }
-      },
-      {
-        "type": "NodeLabel",
-        "label": true,
-        "size": {
-          "width": 15,
-          "height": 15
-        },
-        "position": {
-          "x": -1489.6944580078125,
-          "y": -1000.4999389648438
-        },
-        "id": "5d98b5f9-217d-4411-92b1-19f6788644d4",
-        "z": 2622,
-        "parent": "a217add9-69cb-4a16-a4f8-548ec34fe767",
-        "attrs": {
-          "label": {
-            "refX": "50%",
-            "textAnchor": "middle",
-            "refY": "50%",
-            "textVerticalAnchor": "middle"
-          }
-        }
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "c6a4d30a-0807-4f4d-95c3-65a0e3eff115",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 10,
-              "dy": 106,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "target": {
-          "id": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 96.416748046875,
-              "dy": 88.3154296875,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_SYS_ENTER"
-              }
-            },
-            "position": {
-              "distance": 0.2291946157458251,
-              "offset": 16,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "2"
-              }
-            }
-          }
-        ],
-        "id": "2bf14f02-a9c0-4d36-a32b-5db321c21f52",
-        "z": 2623,
-        "vertices": [
-          {
-            "x": -1474,
-            "y": -458.49993896484375
-          }
-        ],
-        "parent": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "a217add9-69cb-4a16-a4f8-548ec34fe767"
-        },
-        "target": {
-          "id": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 113.416748046875,
-              "dy": 25.3154296875,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {},
-            "position": {}
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "1"
-              }
-            }
-          }
-        ],
-        "id": "4bdf86dc-2012-437f-90fa-8b0047a8cd21",
-        "z": 2623,
-        "parent": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "3ea82168-f16d-4d13-9dd6-31e551afb05a"
-        },
-        "target": {
-          "id": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 39.5069580078125,
-              "dy": 76.89639282226562,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_SYS_ENTER"
-              }
-            },
-            "position": {
-              "distance": 0.10860352125275916,
-              "offset": -14.004211425781252,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "1"
-              }
-            }
-          }
-        ],
-        "id": "42ae8579-f7c1-4d50-b81f-8841787c5b8c",
-        "z": 2623,
-        "vertices": [],
-        "parent": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 156.416748046875,
-              "dy": 84.3154296875,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "target": {
-          "id": "c6a4d30a-0807-4f4d-95c3-65a0e3eff115",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 76,
-              "dy": 22.89639663696289,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_SYS_ENTER [submenu == 2] /tmpo_debajo =TMPO_DEBAJO_MAX"
-              }
-            },
-            "position": {
-              "distance": 0.7968471154281697,
-              "offset": -34.578482104500026,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "4"
-              }
-            }
-          }
-        ],
-        "id": "5eb87323-b9e5-4b62-8e8c-a4eae2af4687",
-        "z": 2623,
-        "vertices": [
-          {
-            "x": -1322,
-            "y": -645.2499389648438
-          }
-        ],
-        "parent": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 8,
-              "dy": 82.25,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "target": {
-          "id": "3ea82168-f16d-4d13-9dd6-31e551afb05a",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 67,
-              "dy": 19.89639663696289,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_SYS_ENTER [submenu == 1] /tmpo_espera=TMPO_ESPERA_MAX"
-              }
-            },
-            "position": {
-              "distance": 0.5498580019252335,
-              "offset": 17.075566963831378,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "3"
-              }
-            }
-          }
-        ],
-        "id": "e8bdce38-ea9f-4f26-a5dc-ecce46407552",
-        "z": 2623,
-        "vertices": [],
-        "parent": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "f78a822c-e00c-4e71-9dcf-1204648f50aa"
-        },
-        "target": {
-          "id": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 0.5069580078125,
-              "dy": 56.896392822265625,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_SYS_NEXT [submenu<submenu_max]\n/submenu=submenu+1"
-              }
-            },
-            "position": {
-              "distance": 0.3661785383909462,
-              "offset": 103.3318044776729,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "1"
-              }
-            }
-          }
-        ],
-        "id": "5dc1ee54-955a-442b-bb0d-ce8cfdce8e5b",
-        "z": 2623,
-        "vertices": [
-          {
-            "x": -1621.4166641235352,
-            "y": -770.4999389648438
-          }
-        ],
-        "parent": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "f78a822c-e00c-4e71-9dcf-1204648f50aa"
-        },
-        "target": {
-          "id": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 168.5069580078125,
-              "dy": 27.5,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_SYS_NEXT [submenu==submenu_max]\n/submenu=1"
-              }
-            },
-            "position": {
-              "distance": 0.5471813794272817,
-              "offset": 74.18106914554039,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "2"
-              }
-            }
-          }
-        ],
-        "id": "f5dc0d2b-4a3f-4d2d-8289-35d92175e0ab",
-        "z": 2623,
-        "vertices": [
-          {
-            "x": -1326.909719467163,
-            "y": -732.4999389648438
-          }
-        ],
-        "parent": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "5088e524-977a-43a6-ab4d-1cfa83ed41e0"
-        },
-        "target": {
-          "id": "f7315f39-6fc6-4ae4-a120-cc70502967ad",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 17.02490234375,
-              "dy": 71.1875,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {},
-            "position": {}
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "1"
-              }
-            }
-          }
-        ],
-        "id": "3485f5fc-ef93-45de-9160-ee895b72455b",
-        "z": 2623,
-        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "58ac61db-d713-45a4-b6c7-2f558d1aa4dd"
-        },
-        "target": {
-          "id": "9dd97b1b-86cf-4354-92ab-f506da620b0b",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 163.3955078125,
-              "dy": 82.375,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_SYS_ACCIONAR_PORTON\n/tick = TICK_MAX;\nabriendo = false;\nraise EV_ACT_CERRANDO_ON"
-              }
-            },
-            "position": {
-              "distance": 0.6432375248095061,
-              "offset": -42.953857421875,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "1"
-              }
-            }
-          }
-        ],
-        "id": "41e86145-d89d-4e9e-b59f-ddfd14b4ea24",
-        "z": 2623,
-        "vertices": [
-          {
-            "x": -3231.025131225586,
-            "y": -413.87494468688965
-          }
-        ],
-        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "9dd97b1b-86cf-4354-92ab-f506da620b0b"
-        },
-        "target": {
-          "id": "f7315f39-6fc6-4ae4-a120-cc70502967ad",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 58,
-              "dy": 104.92857360839844,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "\n[tick == 0]\n/raise EV_ACT_CERRANDO_OFF;\nraise EV_ACT_COMPLETAMENTE_CERRADO_ON"
-              }
-            },
-            "position": {
-              "distance": 0.493836032653982,
-              "offset": -48.99580408993478,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "2"
-              }
-            }
-          }
-        ],
-        "id": "1ca7ed51-923f-4dcf-a35a-55bd6713330c",
-        "z": 2623,
-        "vertices": [],
-        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "9dd97b1b-86cf-4354-92ab-f506da620b0b"
-        },
-        "target": {
-          "id": "9dd97b1b-86cf-4354-92ab-f506da620b0b",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 128,
-              "dy": 90,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "[tick>0] \n/ tick --"
-              }
-            },
-            "position": {
-              "distance": 0.5189092747108797,
-              "offset": 32,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "1"
-              }
-            }
-          }
-        ],
-        "id": "b029b3c9-a88b-4fac-871a-d422e45334ee",
-        "z": 2623,
-        "parent": "9dd97b1b-86cf-4354-92ab-f506da620b0b",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "9dd97b1b-86cf-4354-92ab-f506da620b0b"
-        },
-        "target": {
-          "id": "bfcaec29-6c86-413c-bf36-d477c7e766af",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 5.8828125,
-              "dy": 98.078125,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_SYS_AUTO_DEBAJO\n/raise EV_ACT_CERRANDO_OFF"
-              }
-            },
-            "position": {
-              "distance": 0.7434303450841863,
-              "offset": 98,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "4"
-              }
-            }
-          }
-        ],
-        "id": "44560611-2d0c-4225-8f86-4d7742ca29d7",
-        "z": 2623,
-        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "9dd97b1b-86cf-4354-92ab-f506da620b0b",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 174.3955078125,
-              "dy": 14.375,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "target": {
-          "id": "bfcaec29-6c86-413c-bf36-d477c7e766af",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 124.3955078125,
-              "dy": 53.078125,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_SYS_ACCIONAR_PORTON [tick>0]\n/raise EV_ACT_CERRANDO_OFF"
-              }
-            },
-            "position": {
-              "distance": 0.6767047813187355,
-              "offset": 110.822509765625,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "3"
-              }
-            }
-          }
-        ],
-        "id": "2eb8fade-ba37-4532-a821-a634a4ec460f",
-        "z": 2623,
-        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
-        "vertices": [
-          {
-            "x": -3543.487434387207,
-            "y": -441.49993896484375
-          },
-          {
-            "x": -3496,
-            "y": -559.4999389648438
-          }
-        ],
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "bfcaec29-6c86-413c-bf36-d477c7e766af"
-        },
-        "target": {
-          "id": "9dd97b1b-86cf-4354-92ab-f506da620b0b",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 18.85791015625,
-              "dy": 14,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_SYS_ACCIONAR_PORTON \n[abriendo == true && auto_debajo ==false]\n/abriendo = false;\nraise EV_ACT_CERRANDO_ON"
-              }
-            },
-            "position": {
-              "distance": 0.5606112035448683,
-              "offset": 157.2763741183322,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "1"
-              }
-            }
-          }
-        ],
-        "id": "2b30eb57-e2c2-4f46-9520-9aaca0dd303b",
-        "z": 2623,
-        "vertices": [],
-        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "bfcaec29-6c86-413c-bf36-d477c7e766af"
-        },
-        "target": {
-          "id": "8a66df1d-1c33-4135-bb11-634a2edc20b6",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 26.47509765625,
-              "dy": 93.703125,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_SYS_ACCIONAR_PORTON [abriendo == false]\n/abriendo =true;\nraise EV_ACT_ABRIENDO_ON"
-              }
-            },
-            "position": {
-              "distance": 0.6274505016850486,
-              "offset": -160,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "2"
-              }
-            }
-          }
-        ],
-        "id": "02db73d2-8a67-4681-afc1-2e177e1528b7",
-        "z": 2623,
-        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "f7315f39-6fc6-4ae4-a120-cc70502967ad"
-        },
-        "target": {
-          "id": "8a66df1d-1c33-4135-bb11-634a2edc20b6",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 7.47509765625,
-              "dy": 21.703125,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_SYS_ACCIONAR_PORTON\n/tick = TICK_MAX;\nabriendo = true;\nraise EV_ACT_ABRIENDO_ON;\nraise EV_ACT_COMPLETAMENTE_CERRADO_OFF"
-              }
-            },
-            "position": {
-              "distance": 0.30947762165516285,
-              "offset": -51.0233154296875,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "1"
-              }
-            }
-          }
-        ],
-        "id": "d26adc4a-a530-4f75-a9ac-44e7f85ff76c",
-        "z": 2623,
-        "vertices": [
-          {
-            "x": -3994,
-            "y": -894.7999389648437
-          }
-        ],
-        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "8a66df1d-1c33-4135-bb11-634a2edc20b6"
-        },
-        "target": {
-          "id": "58ac61db-d713-45a4-b6c7-2f558d1aa4dd",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 73.9874267578125,
-              "dy": 13.428573608398438,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "[tick == 0]\n/raise EV_ACT_ABRIENDO_OFF"
-              }
-            },
-            "position": {
-              "distance": 0.5667334558000862,
-              "offset": -19.73642851675182,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "1"
-              }
-            }
-          }
-        ],
-        "id": "d3446726-0fc2-4d88-829b-f06314aa921d",
-        "z": 2623,
-        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "8a66df1d-1c33-4135-bb11-634a2edc20b6"
-        },
-        "target": {
-          "id": "bfcaec29-6c86-413c-bf36-d477c7e766af",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 83.47509765625,
-              "dy": 22.0185546875,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_SYS_ACCIONAR_PORTON [tick>0]\n/raise EV_ACT_ABRIENDO_OFF"
-              }
-            },
-            "position": {
-              "distance": 0.43364431211015225,
-              "offset": -117.00008789062485,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "2"
-              }
-            }
-          }
-        ],
-        "id": "bd909b94-eb44-4c25-9039-d3c580c0952c",
-        "z": 2623,
-        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "8a66df1d-1c33-4135-bb11-634a2edc20b6"
-        },
-        "target": {
-          "id": "8a66df1d-1c33-4135-bb11-634a2edc20b6",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 57.47509765625,
-              "dy": 9.703125,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "[tick >0]\n/tick--"
-              }
-            },
-            "position": {
-              "distance": 0.5477704228077533,
-              "offset": 28.077591252528343,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "3"
-              }
-            }
-          }
-        ],
-        "id": "980fec10-1018-48cd-a059-e45c49f92453",
-        "z": 2623,
-        "parent": "8a66df1d-1c33-4135-bb11-634a2edc20b6",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "82887126-7e2f-44d3-82f7-afb9063fef2f"
-        },
-        "target": {
-          "x": -5348,
-          "y": -1644,
-          "id": "0f4b0a04-0eb0-4333-a08c-ec9284e33e17",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 350,
-              "dy": 106.5,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {},
-            "position": {}
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "1"
-              }
-            }
-          }
-        ],
-        "id": "3bccd32c-58e1-4bb5-9024-dc4c78648002",
-        "z": 2623,
-        "parent": "6e82437d-7cb7-4393-928d-b844bce30d17",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "8f4c816a-29cd-42dc-9c60-2287f7a616ef"
-        },
-        "target": {
-          "x": -3941,
-          "y": -783,
-          "id": "0f4b0a04-0eb0-4333-a08c-ec9284e33e17",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 1345.02490234375,
-              "dy": 862.875,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_SYS_MENU"
-              }
-            },
-            "position": {}
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "1"
-              }
-            }
-          }
-        ],
-        "id": "0d258f19-8532-4b9a-a0b3-4cd7bf2b0b45",
-        "z": 2623,
-        "parent": "6e82437d-7cb7-4393-928d-b844bce30d17",
-        "vertices": [],
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "0f4b0a04-0eb0-4333-a08c-ec9284e33e17"
-        },
-        "target": {
-          "x": -3310,
-          "y": -1058,
-          "id": "8f4c816a-29cd-42dc-9c60-2287f7a616ef",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 22,
-              "dy": 684,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_SYS_MENU"
-              }
-            },
-            "position": {}
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "1"
-              }
-            }
-          }
-        ],
-        "id": "35e6b580-81b1-4727-89bf-428d96d70066",
-        "z": 2623,
-        "parent": "6e82437d-7cb7-4393-928d-b844bce30d17",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "3ea82168-f16d-4d13-9dd6-31e551afb05a"
-        },
-        "target": {
-          "id": "3ea82168-f16d-4d13-9dd6-31e551afb05a",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 1,
-              "dy": 58,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_SYS_NEXT [tmpo_espera >0]\n/tmpo_espera --"
-              }
-            },
-            "position": {
-              "distance": 0.28312988229178837,
-              "offset": 33.845742190794915,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "2"
-              }
-            }
-          }
-        ],
-        "id": "32b6c883-ba5c-4d2d-857c-448b9bf461f1",
-        "z": 2623,
-        "vertices": [
-          {
-            "x": -2108,
-            "y": -491.99993896484375
-          }
-        ],
-        "parent": "3ea82168-f16d-4d13-9dd6-31e551afb05a",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "3ea82168-f16d-4d13-9dd6-31e551afb05a",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 37,
-              "dy": 126.5,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "target": {
-          "id": "3ea82168-f16d-4d13-9dd6-31e551afb05a",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 98,
-              "dy": 115,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_SYS_NEXT [tmpo_espera == 0]\n/tmpo_espera =TMPO_ESPERA_MAX"
-              }
-            },
-            "position": {
-              "distance": 0.6201217527451671,
-              "offset": 28.903618857280804,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "3"
-              }
-            }
-          }
-        ],
-        "id": "6ded51d0-302d-4cb3-8e65-03e64d70e048",
-        "z": 2624,
-        "vertices": [
-          {
-            "x": -1850.4899999999998,
-            "y": -362.99993896484375
-          }
-        ],
-        "parent": "3ea82168-f16d-4d13-9dd6-31e551afb05a",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "c6a4d30a-0807-4f4d-95c3-65a0e3eff115"
-        },
-        "target": {
-          "id": "c6a4d30a-0807-4f4d-95c3-65a0e3eff115",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 114,
-              "dy": 126.16666412353516,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_SYS_NEXT [tmpo_debajo >0]\n/tmpo_debajo --"
-              }
-            },
-            "position": {
-              "distance": 0.5055722335813968,
-              "offset": 111,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "1"
-              }
-            }
-          }
-        ],
-        "id": "ab845f2a-cc6e-451d-9092-c0a38baf1fe7",
-        "z": 2625,
-        "vertices": [
-          {
-            "x": -1030,
-            "y": -397.3332748413086
-          }
-        ],
-        "parent": "c6a4d30a-0807-4f4d-95c3-65a0e3eff115",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "c6a4d30a-0807-4f4d-95c3-65a0e3eff115"
-        },
-        "target": {
-          "id": "c6a4d30a-0807-4f4d-95c3-65a0e3eff115",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 108,
-              "dy": 196.16666412353516,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_SYS_NEXT [tmpo_debajo == 0]\n/tmpo_debajo =TMPO_DEBAJO_MAX"
-              }
-            },
-            "position": {
-              "distance": 0.3970322394131423,
-              "offset": 37,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "3"
-              }
-            }
-          }
-        ],
-        "id": "e7bca249-4404-404c-a505-a07725ea8c03",
-        "z": 2626,
-        "parent": "c6a4d30a-0807-4f4d-95c3-65a0e3eff115",
-        "attrs": {}
-      },
-      {
-        "type": "Region",
-        "position": {
           "x": 530.4999389648438,
           "y": 392.5
         },
         "size": {
-          "width": 964,
-          "height": 344
+          "height": 344,
+          "width": 964
         },
         "angle": 0,
         "fixedRatio": false,
@@ -5286,8 +3197,7 @@
         "parent": "44ea16ee-e70a-4ded-82a5-2b22ec7684a0",
         "attrs": {
           "label": {
-            "text": "EL LED SE ENCIENDE SI EL PORTON NO ESTA\nCOMPLETAMENTE CERRADO",
-            "annotations": []
+            "text": "EL LED SE ENCIENDE SI EL PORTON NO ESTA\nCOMPLETAMENTE CERRADO"
           }
         }
       },
@@ -5385,6 +3295,7 @@
         "parent": "f5a8bceb-51f2-4014-a09d-28457e8a3483",
         "attrs": {
           "label": {
+            "fill": "#333333",
             "refX": "50%",
             "textAnchor": "middle",
             "refY": "50%",
@@ -5422,7 +3333,7 @@
           {
             "attrs": {
               "text": {
-                "text": "EV_ACT_COMPLETAMENTE_CERRADO_ON"
+                "text": "EV_ACT_COMPLETAMENTE_CERRADO_OFF"
               }
             },
             "position": {}
@@ -5473,7 +3384,7 @@
           {
             "attrs": {
               "text": {
-                "text": "EV_ACT_COMPLETAMENTE_CERRADO_OFF"
+                "text": "EV_ACT_COMPLETAMENTE_CERRADO_ON"
               }
             },
             "position": {}
@@ -5548,8 +3459,8 @@
           "y": -388
         },
         "size": {
-          "width": 771,
-          "height": 344
+          "width": 961.7055053710938,
+          "height": 363
         },
         "angle": 0,
         "fixedRatio": false,
@@ -5558,13 +3469,13 @@
         "id": "2ed48e39-a543-4301-9e73-6cf0ae7fa0e3",
         "z": 2663,
         "embeds": [
-          "fb7f5c08-bea6-4044-b2bb-6c9c98c5be5b",
           "b575d66b-ec40-4ea3-a4dc-c34b0195577e",
           "77e58e55-fe36-448c-8f7d-deadfc7f6240",
+          "fb7f5c08-bea6-4044-b2bb-6c9c98c5be5b",
           "fb762d33-114f-4854-8cf5-3d2d0ebb60ea",
           "3726899d-78a3-4385-a27c-d411763e5096",
-          "b29cc5f5-e6ac-48a0-a95c-8110880b8476",
-          "8b4f5660-5ccf-47ca-9f2e-2475d8ba78ab"
+          "8b4f5660-5ccf-47ca-9f2e-2475d8ba78ab",
+          "b29cc5f5-e6ac-48a0-a95c-8110880b8476"
         ],
         "attrs": {
           "priority": {
@@ -5592,8 +3503,7 @@
         "parent": "2ed48e39-a543-4301-9e73-6cf0ae7fa0e3",
         "attrs": {
           "label": {
-            "text": "LA SIRENA SE PRENDE SI SE PASO \nEL TIEMPO DE PERMANENCIA DEBAJO",
-            "annotations": []
+            "text": "LA SIRENA SE PRENDE SI SE PASO \nEL TIEMPO DE PERMANENCIA DEBAJO"
           }
         }
       },
@@ -5626,56 +3536,6 @@
         }
       },
       {
-        "type": "State",
-        "position": {
-          "x": 777.794189453125,
-          "y": -224.87493896484375
-        },
-        "size": {
-          "width": 163,
-          "height": 61.74994468688965
-        },
-        "angle": 0,
-        "fixedRatio": false,
-        "embedable": true,
-        "linkable": true,
-        "id": "b29cc5f5-e6ac-48a0-a95c-8110880b8476",
-        "z": 2666,
-        "parent": "2ed48e39-a543-4301-9e73-6cf0ae7fa0e3",
-        "attrs": {
-          "name": {
-            "text": "ST_SIRENA_PRENDIDA",
-            "fill": "#555555",
-            "fontSize": 12
-          }
-        }
-      },
-      {
-        "type": "State",
-        "position": {
-          "x": 1057.79443359375,
-          "y": -230.60159301757812
-        },
-        "size": {
-          "width": 151.234375,
-          "height": 68.20318603515625
-        },
-        "angle": 0,
-        "fixedRatio": false,
-        "embedable": true,
-        "linkable": true,
-        "id": "8b4f5660-5ccf-47ca-9f2e-2475d8ba78ab",
-        "z": 2667,
-        "parent": "2ed48e39-a543-4301-9e73-6cf0ae7fa0e3",
-        "attrs": {
-          "name": {
-            "text": "ST_SIRENA_APAGADA",
-            "fill": "#555555",
-            "fontSize": 12
-          }
-        }
-      },
-      {
         "type": "NodeLabel",
         "label": true,
         "size": {
@@ -5691,153 +3551,13 @@
         "parent": "3726899d-78a3-4385-a27c-d411763e5096",
         "attrs": {
           "label": {
+            "fill": "#333333",
             "refX": "50%",
             "textAnchor": "middle",
             "refY": "50%",
             "textVerticalAnchor": "middle"
           }
         }
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "8b4f5660-5ccf-47ca-9f2e-2475d8ba78ab"
-        },
-        "target": {
-          "id": "b29cc5f5-e6ac-48a0-a95c-8110880b8476",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 154.000244140625,
-              "dy": 49.87493896484375,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {},
-            "position": {}
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "1"
-              }
-            }
-          }
-        ],
-        "id": "fb7f5c08-bea6-4044-b2bb-6c9c98c5be5b",
-        "z": 2672,
-        "parent": "2ed48e39-a543-4301-9e73-6cf0ae7fa0e3",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "b29cc5f5-e6ac-48a0-a95c-8110880b8476"
-        },
-        "target": {
-          "id": "8b4f5660-5ccf-47ca-9f2e-2475d8ba78ab",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 13,
-              "dy": 31.6015625,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {},
-            "position": {}
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "1"
-              }
-            }
-          }
-        ],
-        "id": "b575d66b-ec40-4ea3-a4dc-c34b0195577e",
-        "z": 2672,
-        "parent": "2ed48e39-a543-4301-9e73-6cf0ae7fa0e3",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "3726899d-78a3-4385-a27c-d411763e5096"
-        },
-        "target": {
-          "id": "b29cc5f5-e6ac-48a0-a95c-8110880b8476",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 25,
-              "dy": 36.34906005859375,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {},
-            "position": {}
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "1"
-              }
-            }
-          }
-        ],
-        "id": "77e58e55-fe36-448c-8f7d-deadfc7f6240",
-        "z": 2672,
-        "parent": "2ed48e39-a543-4301-9e73-6cf0ae7fa0e3",
-        "attrs": {}
       },
       {
         "type": "Region",
@@ -5991,6 +3711,7 @@
         "parent": "9e0f45d0-c888-4b43-b99a-d282583a722a",
         "attrs": {
           "label": {
+            "fill": "#333333",
             "refX": "50%",
             "textAnchor": "middle",
             "refY": "50%",
@@ -6119,6 +3840,7 @@
         "parent": "ce27ecdb-78b2-44b8-86dd-1196f297204f",
         "attrs": {
           "label": {
+            "fill": "#333333",
             "refX": "50%",
             "textAnchor": "middle",
             "refY": "50%",
@@ -6438,8 +4160,8 @@
           "y": -9.375
         },
         "size": {
-          "width": 990,
-          "height": 368.75
+          "height": 368.75,
+          "width": 990
         },
         "angle": 0,
         "fixedRatio": false,
@@ -6482,8 +4204,7 @@
         "parent": "28a18980-6c7d-4d75-b19c-e50f5935ed68",
         "attrs": {
           "label": {
-            "text": "EL LED SE ENCIENDE SI EL PORTON ESTA\nCOMPLETAMENTE CERRADO",
-            "annotations": []
+            "text": "EL LED SE ENCIENDE SI EL PORTON ESTA\nCOMPLETAMENTE CERRADO"
           }
         }
       },
@@ -6581,6 +4302,7 @@
         "parent": "9501cc61-9375-4b06-abcc-c76655830a05",
         "attrs": {
           "label": {
+            "fill": "#333333",
             "refX": "50%",
             "textAnchor": "middle",
             "refY": "50%",
@@ -6669,7 +4391,7 @@
           {
             "attrs": {
               "text": {
-                "text": "EV_ACT_COMPLETAMENTE_CERRADO_ON"
+                "text": "EV_ACT_COMPLETAMENTE_CERRADO_OFF"
               }
             },
             "position": {}
@@ -6744,8 +4466,8 @@
           "y": -1542.9061889648438
         },
         "size": {
-          "width": 1184,
-          "height": 461
+          "height": 461,
+          "width": 1184
         },
         "angle": 0,
         "fixedRatio": false,
@@ -6788,8 +4510,7 @@
         "parent": "da051513-724e-4d69-8ae4-ede859d4112b",
         "attrs": {
           "label": {
-            "text": "EL LED TITILA CUANDO SE \nESTA ABRIENDO EL PORTON\nSINO, ESTA APAGADO",
-            "annotations": []
+            "text": "EL LED TITILA CUANDO SE \nESTA ABRIENDO EL PORTON\nSINO, ESTA APAGADO"
           }
         }
       },
@@ -6891,6 +4612,7 @@
         "parent": "81f6c100-9b82-4c29-b381-5fc6047efa66",
         "attrs": {
           "label": {
+            "fill": "#333333",
             "refX": "50%",
             "textAnchor": "middle",
             "refY": "50%",
@@ -6905,8 +4627,8 @@
           "y": -1439.2343082427979
         },
         "size": {
-          "width": 441,
-          "height": 326.203125
+          "height": 326.203125,
+          "width": 441
         },
         "angle": 0,
         "fixedRatio": false,
@@ -7020,6 +4742,7 @@
         "parent": "fc8e65bd-311a-409b-8748-3aeb7cf5ae05",
         "attrs": {
           "label": {
+            "fill": "#333333",
             "refX": "50%",
             "textAnchor": "middle",
             "refY": "50%",
@@ -7333,9 +5056,1784 @@
         "attrs": {}
       },
       {
+        "type": "State",
+        "position": {
+          "x": 1034.5888671875,
+          "y": -269.20318508148193
+        },
+        "size": {
+          "width": 419,
+          "height": 176
+        },
+        "angle": 0,
+        "fixedRatio": false,
+        "embedable": true,
+        "linkable": true,
+        "id": "8b4f5660-5ccf-47ca-9f2e-2475d8ba78ab",
+        "z": 2738,
+        "parent": "2ed48e39-a543-4301-9e73-6cf0ae7fa0e3",
+        "embeds": [
+          "5fad1468-8607-4269-b955-d61a958e298c"
+        ],
+        "attrs": {
+          "name": {
+            "text": "ST_AUTO_DEBAJO_ON",
+            "fill": "#555555",
+            "fontSize": 12
+          }
+        }
+      },
+      {
         "type": "Region",
         "position": {
-          "x": -1793,
+          "x": 1035.5888671875,
+          "y": -247.40631008148193
+        },
+        "size": {
+          "width": 417,
+          "height": 153.203125
+        },
+        "angle": 0,
+        "fixedRatio": false,
+        "embedable": true,
+        "linkable": true,
+        "id": "5fad1468-8607-4269-b955-d61a958e298c",
+        "z": 2743,
+        "parent": "8b4f5660-5ccf-47ca-9f2e-2475d8ba78ab",
+        "embeds": [
+          "d3a26164-24fd-4c81-8ca2-a7c067cc5231",
+          "247abac2-ac54-46d0-b43b-617baf655aad",
+          "cf28013d-ed3f-440d-b1b8-afff7acff068",
+          "a9851aa5-cc5c-49f0-807d-2f16b8d01bef",
+          "fc4edb7d-57d8-4a49-8966-78ede8dc49fa"
+        ],
+        "attrs": {}
+      },
+      {
+        "type": "State",
+        "position": {
+          "x": 698.794189453125,
+          "y": -226.24991703033447
+        },
+        "size": {
+          "width": 163,
+          "height": 61.74994468688965
+        },
+        "angle": 0,
+        "fixedRatio": false,
+        "embedable": true,
+        "linkable": true,
+        "id": "b29cc5f5-e6ac-48a0-a95c-8110880b8476",
+        "z": 2745,
+        "parent": "2ed48e39-a543-4301-9e73-6cf0ae7fa0e3",
+        "attrs": {
+          "name": {
+            "text": "ST_AUTO_DEBAJO_OFF",
+            "fill": "#555555",
+            "fontSize": 12
+          }
+        }
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "3726899d-78a3-4385-a27c-d411763e5096"
+        },
+        "target": {
+          "id": "b29cc5f5-e6ac-48a0-a95c-8110880b8476",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 25,
+              "dy": 36.34906005859375,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {},
+            "position": {}
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "77e58e55-fe36-448c-8f7d-deadfc7f6240",
+        "z": 2746,
+        "parent": "2ed48e39-a543-4301-9e73-6cf0ae7fa0e3",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "8b4f5660-5ccf-47ca-9f2e-2475d8ba78ab"
+        },
+        "target": {
+          "id": "b29cc5f5-e6ac-48a0-a95c-8110880b8476",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 154.000244140625,
+              "dy": 49.87493896484375,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_AUTO_DEBAJO_OFF"
+              }
+            },
+            "position": {}
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "fb7f5c08-bea6-4044-b2bb-6c9c98c5be5b",
+        "z": 2746,
+        "parent": "2ed48e39-a543-4301-9e73-6cf0ae7fa0e3",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "b29cc5f5-e6ac-48a0-a95c-8110880b8476",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 158.205810546875,
+              "dy": 14.249923706054688,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "target": {
+          "id": "8b4f5660-5ccf-47ca-9f2e-2475d8ba78ab",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 0.20556640625,
+              "dy": 57.20318603515625,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_AUTO_DEBAJO_ON"
+              }
+            },
+            "position": {}
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "b575d66b-ec40-4ea3-a4dc-c34b0195577e",
+        "z": 2746,
+        "parent": "2ed48e39-a543-4301-9e73-6cf0ae7fa0e3",
+        "vertices": [],
+        "attrs": {}
+      },
+      {
+        "type": "State",
+        "position": {
+          "x": 1075.80224609375,
+          "y": -202.87494468688965
+        },
+        "size": {
+          "width": 115.21875,
+          "height": 60
+        },
+        "angle": 0,
+        "fixedRatio": false,
+        "embedable": true,
+        "linkable": true,
+        "id": "cf28013d-ed3f-440d-b1b8-afff7acff068",
+        "z": 2809,
+        "parent": "5fad1468-8607-4269-b955-d61a958e298c",
+        "attrs": {
+          "name": {
+            "text": "ST_CHICHARRA_OFF",
+            "fill": "#555555",
+            "fontSize": 12
+          }
+        }
+      },
+      {
+        "type": "State",
+        "position": {
+          "x": 1332.7030639648438,
+          "y": -202.87494468688965
+        },
+        "size": {
+          "width": 108.03125,
+          "height": 60
+        },
+        "angle": 0,
+        "fixedRatio": false,
+        "embedable": true,
+        "linkable": true,
+        "id": "a9851aa5-cc5c-49f0-807d-2f16b8d01bef",
+        "z": 2811,
+        "parent": "5fad1468-8607-4269-b955-d61a958e298c",
+        "attrs": {
+          "name": {
+            "text": "ST_CHICHARRA_ON",
+            "fill": "#555555",
+            "fontSize": 12
+          }
+        }
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "cf28013d-ed3f-440d-b1b8-afff7acff068"
+        },
+        "target": {
+          "id": "a9851aa5-cc5c-49f0-807d-2f16b8d01bef",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": -0.0899658203125,
+              "dy": 45.3836669921875,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "after tmpo_debajo s"
+              }
+            },
+            "position": {}
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "247abac2-ac54-46d0-b43b-617baf655aad",
+        "z": 2812,
+        "parent": "5fad1468-8607-4269-b955-d61a958e298c",
+        "attrs": {}
+      },
+      {
+        "type": "Entry",
+        "position": {
+          "x": 1075.80224609375,
+          "y": -226.24991703033447
+        },
+        "size": {
+          "height": 15,
+          "width": 15
+        },
+        "angle": 0,
+        "fixedRatio": true,
+        "embedable": false,
+        "linkable": true,
+        "entryKind": "Initial",
+        "id": "fc4edb7d-57d8-4a49-8966-78ede8dc49fa",
+        "markup": "\n    <g class=\"scalable default-outline\" stroke-linejoin=\"round\">\n      <circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#000000\"/>\n      <text font-family=\"FontAwesome\" font-size=\"13\" x=\"-5\" y=\"0\" opacity=\"0\" fill=\"#00ff00\" text=\"\"/>\n    </g>\n  ",
+        "z": 2813,
+        "embeds": [
+          "c9e065aa-f186-4246-8d5f-49a119e7ef0f"
+        ],
+        "parent": "5fad1468-8607-4269-b955-d61a958e298c",
+        "attrs": {
+          "name": {
+            "fill": "#555555"
+          }
+        }
+      },
+      {
+        "type": "NodeLabel",
+        "label": true,
+        "size": {
+          "width": 15,
+          "height": 15
+        },
+        "position": {
+          "x": 1075.80224609375,
+          "y": -211.24991703033447
+        },
+        "id": "c9e065aa-f186-4246-8d5f-49a119e7ef0f",
+        "z": 2814,
+        "parent": "fc4edb7d-57d8-4a49-8966-78ede8dc49fa",
+        "attrs": {
+          "label": {
+            "fill": "#333333",
+            "refX": "50%",
+            "textAnchor": "middle",
+            "refY": "50%",
+            "textVerticalAnchor": "middle"
+          }
+        }
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "fc4edb7d-57d8-4a49-8966-78ede8dc49fa"
+        },
+        "target": {
+          "id": "cf28013d-ed3f-440d-b1b8-afff7acff068",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 3.9517822265625,
+              "dy": 38.3836669921875,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {},
+            "position": {}
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "d3a26164-24fd-4c81-8ca2-a7c067cc5231",
+        "z": 2815,
+        "parent": "5fad1468-8607-4269-b955-d61a958e298c",
+        "attrs": {}
+      },
+      {
+        "type": "Region",
+        "position": {
+          "x": -5191,
+          "y": -1694.8749446868896
+        },
+        "size": {
+          "height": 1552,
+          "width": 4712
+        },
+        "angle": 0,
+        "fixedRatio": false,
+        "embedable": true,
+        "linkable": true,
+        "id": "6e82437d-7cb7-4393-928d-b844bce30d17",
+        "z": 2850,
+        "embeds": [
+          "0d258f19-8532-4b9a-a0b3-4cd7bf2b0b45",
+          "3bccd32c-58e1-4bb5-9024-dc4c78648002",
+          "35e6b580-81b1-4727-89bf-428d96d70066",
+          "0f4b0a04-0eb0-4333-a08c-ec9284e33e17",
+          "8f4c816a-29cd-42dc-9c60-2287f7a616ef",
+          "82887126-7e2f-44d3-82f7-afb9063fef2f"
+        ],
+        "attrs": {
+          "priority": {
+            "text": 1
+          },
+          "name": {
+            "text": "interactive_menu"
+          }
+        }
+      },
+      {
+        "type": "State",
+        "position": {
+          "x": -4878,
+          "y": -1397.7499504089355
+        },
+        "size": {
+          "width": 1612,
+          "height": 1100.671880722046
+        },
+        "angle": 0,
+        "fixedRatio": false,
+        "embedable": true,
+        "linkable": true,
+        "id": "0f4b0a04-0eb0-4333-a08c-ec9284e33e17",
+        "z": 2851,
+        "parent": "6e82437d-7cb7-4393-928d-b844bce30d17",
+        "embeds": [
+          "e667c0e5-ce25-439a-941c-d8f8a1136c74"
+        ],
+        "attrs": {
+          "name": {
+            "text": "ST_MODO_NORMAL",
+            "fill": "#555555",
+            "fontSize": 12
+          }
+        }
+      },
+      {
+        "type": "State",
+        "position": {
+          "x": -2594,
+          "y": -1357.8749446868896
+        },
+        "size": {
+          "width": 1674,
+          "height": 1041.124994277954
+        },
+        "angle": 0,
+        "fixedRatio": false,
+        "embedable": true,
+        "linkable": true,
+        "id": "8f4c816a-29cd-42dc-9c60-2287f7a616ef",
+        "z": 2852,
+        "embeds": [
+          "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d"
+        ],
+        "parent": "6e82437d-7cb7-4393-928d-b844bce30d17",
+        "attrs": {
+          "name": {
+            "text": "ST_MODO_SETUP",
+            "fill": "#555555",
+            "fontSize": 12
+          }
+        }
+      },
+      {
+        "type": "Entry",
+        "position": {
+          "x": -4732.986110687256,
+          "y": -1629.8749446868896
+        },
+        "size": {
+          "height": 15,
+          "width": 15
+        },
+        "angle": 0,
+        "fixedRatio": true,
+        "embedable": false,
+        "linkable": true,
+        "entryKind": "Initial",
+        "id": "82887126-7e2f-44d3-82f7-afb9063fef2f",
+        "markup": "\n    <g class=\"scalable default-outline\" stroke-linejoin=\"round\">\n      <circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#000000\"/>\n      <text font-family=\"FontAwesome\" font-size=\"13\" x=\"-5\" y=\"0\" opacity=\"0\" fill=\"#00ff00\" text=\"\"/>\n    </g>\n  ",
+        "z": 2853,
+        "parent": "6e82437d-7cb7-4393-928d-b844bce30d17",
+        "embeds": [
+          "d28b13b8-9045-4a23-875b-386fc7aa4dfa"
+        ],
+        "attrs": {
+          "name": {
+            "fill": "#555555"
+          }
+        }
+      },
+      {
+        "type": "Region",
+        "position": {
+          "x": -4877,
+          "y": -1375.9530754089355
+        },
+        "size": {
+          "width": 1610,
+          "height": 1077.875005722046
+        },
+        "angle": 0,
+        "fixedRatio": false,
+        "embedable": true,
+        "linkable": true,
+        "id": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
+        "z": 2857,
+        "embeds": [
+          "44560611-2d0c-4225-8f86-4d7742ca29d7",
+          "bd909b94-eb44-4c25-9039-d3c580c0952c",
+          "2eb8fade-ba37-4532-a821-a634a4ec460f",
+          "d596b3d8-70f7-440d-877f-1645e91d68b7",
+          "02db73d2-8a67-4681-afc1-2e177e1528b7",
+          "2b30eb57-e2c2-4f46-9520-9aaca0dd303b",
+          "aea3a25d-26c7-43b5-b160-8ae61e52e1ec",
+          "d3446726-0fc2-4d88-829b-f06314aa921d",
+          "41e86145-d89d-4e9e-b59f-ddfd14b4ea24",
+          "1ca7ed51-923f-4dcf-a35a-55bd6713330c",
+          "3485f5fc-ef93-45de-9160-ee895b72455b",
+          "d26adc4a-a530-4f75-a9ac-44e7f85ff76c",
+          "8a66df1d-1c33-4135-bb11-634a2edc20b6",
+          "9dd97b1b-86cf-4354-92ab-f506da620b0b",
+          "6359ab2c-34c0-4118-bc52-054eabedc8a6",
+          "5088e524-977a-43a6-ab4d-1cfa83ed41e0",
+          "f7315f39-6fc6-4ae4-a120-cc70502967ad",
+          "58ac61db-d713-45a4-b6c7-2f558d1aa4dd",
+          "bfcaec29-6c86-413c-bf36-d477c7e766af"
+        ],
+        "parent": "0f4b0a04-0eb0-4333-a08c-ec9284e33e17",
+        "attrs": {}
+      },
+      {
+        "type": "Region",
+        "position": {
+          "x": -2593,
+          "y": -1336.0780696868896
+        },
+        "size": {
+          "width": 1672,
+          "height": 1018.3281192779541
+        },
+        "angle": 0,
+        "fixedRatio": false,
+        "embedable": true,
+        "linkable": true,
+        "id": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
+        "z": 2858,
+        "embeds": [
+          "42ae8579-f7c1-4d50-b81f-8841787c5b8c",
+          "4bdf86dc-2012-437f-90fa-8b0047a8cd21",
+          "2bf14f02-a9c0-4d36-a32b-5db321c21f52",
+          "e8bdce38-ea9f-4f26-a5dc-ecce46407552",
+          "5eb87323-b9e5-4b62-8e8c-a4eae2af4687",
+          "6ace7a9c-3b4a-4e37-b7a6-44830df0b005",
+          "3ea82168-f16d-4d13-9dd6-31e551afb05a",
+          "c6a4d30a-0807-4f4d-95c3-65a0e3eff115",
+          "a217add9-69cb-4a16-a4f8-548ec34fe767",
+          "f78a822c-e00c-4e71-9dcf-1204648f50aa"
+        ],
+        "parent": "8f4c816a-29cd-42dc-9c60-2287f7a616ef",
+        "attrs": {}
+      },
+      {
+        "type": "NodeLabel",
+        "label": true,
+        "size": {
+          "width": 15,
+          "height": 15
+        },
+        "position": {
+          "x": -4732.986110687256,
+          "y": -1614.8749446868896
+        },
+        "id": "d28b13b8-9045-4a23-875b-386fc7aa4dfa",
+        "z": 2859,
+        "parent": "82887126-7e2f-44d3-82f7-afb9063fef2f",
+        "attrs": {
+          "label": {
+            "fill": "#333333",
+            "refX": "50%",
+            "textAnchor": "middle",
+            "refY": "50%",
+            "textVerticalAnchor": "middle"
+          }
+        }
+      },
+      {
+        "type": "State",
+        "position": {
+          "x": -4173.974868774414,
+          "y": -1049.8749446868896
+        },
+        "size": {
+          "width": 151.234375,
+          "height": 131.59375
+        },
+        "angle": 0,
+        "fixedRatio": false,
+        "embedable": true,
+        "linkable": true,
+        "id": "8a66df1d-1c33-4135-bb11-634a2edc20b6",
+        "z": 2860,
+        "embeds": [
+          "980fec10-1018-48cd-a059-e45c49f92453"
+        ],
+        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
+        "attrs": {
+          "name": {
+            "text": "ST_PORTON_ABRIENDO",
+            "fill": "#555555",
+            "fontSize": 12
+          }
+        }
+      },
+      {
+        "type": "State",
+        "position": {
+          "x": -4214.857681274414,
+          "y": -589.2499504089355
+        },
+        "size": {
+          "width": 180,
+          "height": 132.59375
+        },
+        "angle": 0,
+        "fixedRatio": false,
+        "embedable": true,
+        "linkable": true,
+        "id": "9dd97b1b-86cf-4354-92ab-f506da620b0b",
+        "z": 2862,
+        "embeds": [
+          "b029b3c9-a88b-4fac-871a-d422e45334ee"
+        ],
+        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
+        "attrs": {
+          "name": {
+            "text": "ST_PORTON_CERRANDO",
+            "fill": "#555555",
+            "fontSize": 12
+          }
+        }
+      },
+      {
+        "type": "Note",
+        "position": {
+          "x": -3862.974868774414,
+          "y": -1291.8749446868896
+        },
+        "size": {
+          "width": 333,
+          "height": 104
+        },
+        "angle": 0,
+        "linkable": false,
+        "id": "6359ab2c-34c0-4118-bc52-054eabedc8a6",
+        "z": 2863,
+        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
+        "attrs": {
+          "label": {
+            "text": "SI NO ES CON EL TICK SE PUEDE HACER CON\n(AFTER X SECONDS)\nLA IDEA ES QUE SI NO SE LLEGA A ABRIR Y TOCO\nDE NUEVO EL BOTON, SE FRENA"
+          }
+        }
+      },
+      {
+        "type": "Entry",
+        "position": {
+          "x": -4838.012565612793,
+          "y": -982.3749446868896
+        },
+        "size": {
+          "height": 15,
+          "width": 15
+        },
+        "angle": 0,
+        "fixedRatio": true,
+        "embedable": false,
+        "linkable": true,
+        "entryKind": "Initial",
+        "id": "5088e524-977a-43a6-ab4d-1cfa83ed41e0",
+        "z": 2870,
+        "markup": "\n    <g class=\"scalable default-outline\" stroke-linejoin=\"round\">\n      <circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#000000\"/>\n      <text font-family=\"FontAwesome\" font-size=\"13\" x=\"-5\" y=\"0\" opacity=\"0\" fill=\"#00ff00\" text=\"\"/>\n    </g>\n  ",
+        "embeds": [
+          "ae0cf90e-407a-43fa-a1f4-7aa39a37f6cc"
+        ],
+        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
+        "attrs": {
+          "name": {
+            "fill": "#555555"
+          }
+        }
+      },
+      {
+        "type": "State",
+        "position": {
+          "x": -4774,
+          "y": -909.6717042922974
+        },
+        "size": {
+          "width": 157,
+          "height": 133.5
+        },
+        "angle": 0,
+        "fixedRatio": false,
+        "embedable": true,
+        "linkable": true,
+        "id": "f7315f39-6fc6-4ae4-a120-cc70502967ad",
+        "z": 2871,
+        "embeds": [],
+        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
+        "attrs": {
+          "name": {
+            "text": "ST_PORTON_CERRADO",
+            "fill": "#555555",
+            "fontSize": 12
+          }
+        }
+      },
+      {
+        "type": "State",
+        "position": {
+          "x": -3650.974868774414,
+          "y": -1015.2967596054077
+        },
+        "size": {
+          "width": 134,
+          "height": 102
+        },
+        "angle": 0,
+        "fixedRatio": false,
+        "embedable": true,
+        "linkable": true,
+        "id": "58ac61db-d713-45a4-b6c7-2f558d1aa4dd",
+        "z": 2875,
+        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
+        "attrs": {
+          "name": {
+            "text": "ST_PORTON_ABIERTO",
+            "fill": "#555555",
+            "fontSize": 12
+          }
+        }
+      },
+      {
+        "type": "Note",
+        "position": {
+          "x": -2389.5,
+          "y": -1148.8749446868896
+        },
+        "size": {
+          "width": 643.6788330078125,
+          "height": 69.20000457763672
+        },
+        "angle": 0,
+        "linkable": false,
+        "id": "6ace7a9c-3b4a-4e37-b7a6-44830df0b005",
+        "z": 2879,
+        "parent": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
+        "attrs": {
+          "label": {
+            "text": "TIENE DOS PARAMETROS CONFIGURABLES\nTIEMPO DE ESPERA, Y TIEMPO DE PERMANENCIA DEBAJO(Antes de que empiece a sonar la alarma)\nPODRÍA SETEARSE UN MINIMO PARA AMBOS (Por ahora dejo 0)\nHAY QUE HACER TODO SOLO CON 2 PULSADORES"
+          }
+        }
+      },
+      {
+        "type": "State",
+        "position": {
+          "x": -2096,
+          "y": -654.3749446868896
+        },
+        "size": {
+          "width": 143.02777862548828,
+          "height": 130
+        },
+        "angle": 0,
+        "fixedRatio": false,
+        "embedable": true,
+        "linkable": true,
+        "id": "3ea82168-f16d-4d13-9dd6-31e551afb05a",
+        "z": 2881,
+        "embeds": [
+          "32b6c883-ba5c-4d2d-857c-448b9bf461f1",
+          "6ded51d0-302d-4cb3-8e65-03e64d70e048"
+        ],
+        "parent": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
+        "attrs": {
+          "name": {
+            "text": "ST_MENU_ESPERA",
+            "fill": "#555555",
+            "fontSize": 12
+          },
+          "specification": {
+            "text": "\n"
+          }
+        }
+      },
+      {
+        "type": "State",
+        "position": {
+          "x": -1423,
+          "y": -699.8749446868896
+        },
+        "size": {
+          "width": 147,
+          "height": 199.3333282470703
+        },
+        "angle": 0,
+        "fixedRatio": false,
+        "embedable": true,
+        "linkable": true,
+        "id": "c6a4d30a-0807-4f4d-95c3-65a0e3eff115",
+        "z": 2882,
+        "embeds": [
+          "ab845f2a-cc6e-451d-9092-c0a38baf1fe7",
+          "e7bca249-4404-404c-a505-a07725ea8c03"
+        ],
+        "parent": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
+        "attrs": {
+          "name": {
+            "text": "ST_MENU_DEBAJO",
+            "fill": "#555555",
+            "fontSize": 12
+          }
+        }
+      },
+      {
+        "type": "Entry",
+        "position": {
+          "x": -1652.6944580078125,
+          "y": -1079.674940109253
+        },
+        "size": {
+          "height": 15,
+          "width": 15
+        },
+        "angle": 0,
+        "fixedRatio": true,
+        "embedable": false,
+        "linkable": true,
+        "entryKind": "Initial",
+        "id": "a217add9-69cb-4a16-a4f8-548ec34fe767",
+        "z": 2887,
+        "markup": "\n    <g class=\"scalable default-outline\" stroke-linejoin=\"round\">\n      <circle cx=\"50\" cy=\"50\" r=\"50\" fill=\"#000000\"/>\n      <text font-family=\"FontAwesome\" font-size=\"13\" x=\"-5\" y=\"0\" opacity=\"0\" fill=\"#00ff00\" text=\"\"/>\n    </g>\n  ",
+        "embeds": [
+          "5d98b5f9-217d-4411-92b1-19f6788644d4"
+        ],
+        "parent": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
+        "attrs": {
+          "name": {
+            "fill": "#555555"
+          }
+        }
+      },
+      {
+        "type": "NodeLabel",
+        "label": true,
+        "size": {
+          "width": 15,
+          "height": 15
+        },
+        "position": {
+          "x": -4838.012565612793,
+          "y": -967.3749446868896
+        },
+        "id": "ae0cf90e-407a-43fa-a1f4-7aa39a37f6cc",
+        "z": 2891,
+        "parent": "5088e524-977a-43a6-ab4d-1cfa83ed41e0",
+        "attrs": {
+          "label": {
+            "fill": "#333333",
+            "refX": "50%",
+            "textAnchor": "middle",
+            "refY": "50%",
+            "textVerticalAnchor": "middle"
+          }
+        }
+      },
+      {
+        "type": "NodeLabel",
+        "label": true,
+        "size": {
+          "width": 15,
+          "height": 15
+        },
+        "position": {
+          "x": -1652.6944580078125,
+          "y": -1064.674940109253
+        },
+        "id": "5d98b5f9-217d-4411-92b1-19f6788644d4",
+        "z": 2898,
+        "parent": "a217add9-69cb-4a16-a4f8-548ec34fe767",
+        "attrs": {
+          "label": {
+            "fill": "#333333",
+            "refX": "50%",
+            "textAnchor": "middle",
+            "refY": "50%",
+            "textVerticalAnchor": "middle"
+          }
+        }
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "c6a4d30a-0807-4f4d-95c3-65a0e3eff115"
+        },
+        "target": {
+          "id": "c6a4d30a-0807-4f4d-95c3-65a0e3eff115",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 108,
+              "dy": 196.16666412353516,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_NEXT [tmpo_debajo == 0]\n/tmpo_debajo =TMPO_DEBAJO_MAX"
+              }
+            },
+            "position": {
+              "distance": 0.3970322394131423,
+              "offset": 37,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "3"
+              }
+            }
+          }
+        ],
+        "id": "e7bca249-4404-404c-a505-a07725ea8c03",
+        "z": 2899,
+        "parent": "c6a4d30a-0807-4f4d-95c3-65a0e3eff115",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "3ea82168-f16d-4d13-9dd6-31e551afb05a",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 37,
+              "dy": 126.5,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "target": {
+          "id": "3ea82168-f16d-4d13-9dd6-31e551afb05a",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 98,
+              "dy": 115,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_NEXT [tmpo_espera == 0]\n/tmpo_espera =TMPO_ESPERA_MAX"
+              }
+            },
+            "position": {
+              "distance": 0.6201217527451671,
+              "offset": 28.903618857280804,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "3"
+              }
+            }
+          }
+        ],
+        "id": "6ded51d0-302d-4cb3-8e65-03e64d70e048",
+        "z": 2899,
+        "vertices": [
+          {
+            "x": -2024.4899999999998,
+            "y": -496.37494468688965
+          }
+        ],
+        "parent": "3ea82168-f16d-4d13-9dd6-31e551afb05a",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "3ea82168-f16d-4d13-9dd6-31e551afb05a"
+        },
+        "target": {
+          "id": "3ea82168-f16d-4d13-9dd6-31e551afb05a",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 2,
+              "dy": 16.70318603515625,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_NEXT [tmpo_espera >0]\n/tmpo_espera --"
+              }
+            },
+            "position": {
+              "distance": 0.6003535329383929,
+              "offset": -45.4024431822751,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "2"
+              }
+            }
+          }
+        ],
+        "id": "32b6c883-ba5c-4d2d-857c-448b9bf461f1",
+        "z": 2899,
+        "vertices": [
+          {
+            "x": -2238,
+            "y": -597.6717596054077
+          }
+        ],
+        "parent": "3ea82168-f16d-4d13-9dd6-31e551afb05a",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "5088e524-977a-43a6-ab4d-1cfa83ed41e0"
+        },
+        "target": {
+          "id": "f7315f39-6fc6-4ae4-a120-cc70502967ad",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 17.02490234375,
+              "dy": 71.1875,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {},
+            "position": {}
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "3485f5fc-ef93-45de-9160-ee895b72455b",
+        "z": 2899,
+        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "58ac61db-d713-45a4-b6c7-2f558d1aa4dd",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 114.974853515625,
+              "dy": 39.625,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "target": {
+          "id": "9dd97b1b-86cf-4354-92ab-f506da620b0b",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 151.85791015625,
+              "dy": 108.57818603515625,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "after tmpo_espera s\n[auto_debajo == false]\n/tick = TICK_MAX;\nabriendo = false;\nraise EV_ACT_CERRANDO_ON"
+              }
+            },
+            "position": {
+              "distance": 0.5086526042972775,
+              "offset": -51.00000000000006,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "2"
+              }
+            }
+          }
+        ],
+        "id": "aea3a25d-26c7-43b5-b160-8ae61e52e1ec",
+        "z": 2899,
+        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
+        "vertices": [
+          {
+            "x": -3384,
+            "y": -923.6717596054077
+          }
+        ],
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "58ac61db-d713-45a4-b6c7-2f558d1aa4dd",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 119,
+              "dy": 90.20318603515625,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "target": {
+          "id": "9dd97b1b-86cf-4354-92ab-f506da620b0b",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 163.3955078125,
+              "dy": 82.375,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_ACCIONAR_PORTON\n/tick = TICK_MAX;\nabriendo = false;\nraise EV_ACT_CERRANDO_ON"
+              }
+            },
+            "position": {
+              "distance": 0.5858673062374865,
+              "offset": 49.070263867196694,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "41e86145-d89d-4e9e-b59f-ddfd14b4ea24",
+        "z": 2899,
+        "vertices": [
+          {
+            "x": -3593.974868774414,
+            "y": -506.8717596054077
+          }
+        ],
+        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "9dd97b1b-86cf-4354-92ab-f506da620b0b"
+        },
+        "target": {
+          "id": "9dd97b1b-86cf-4354-92ab-f506da620b0b",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 128,
+              "dy": 90,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "[tick>0] \n/ tick --"
+              }
+            },
+            "position": {
+              "distance": 0.5189092747108797,
+              "offset": 32,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "b029b3c9-a88b-4fac-871a-d422e45334ee",
+        "z": 2899,
+        "parent": "9dd97b1b-86cf-4354-92ab-f506da620b0b",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "9dd97b1b-86cf-4354-92ab-f506da620b0b"
+        },
+        "target": {
+          "id": "f7315f39-6fc6-4ae4-a120-cc70502967ad",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 33.02490234375,
+              "dy": 124.39068603515625,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "\n[tick == 0]\n/raise EV_ACT_CERRANDO_OFF;\nraise EV_ACT_COMPLETAMENTE_CERRADO_ON"
+              }
+            },
+            "position": {
+              "distance": 0.493836032653982,
+              "offset": -48.99580408993478,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "2"
+              }
+            }
+          }
+        ],
+        "id": "1ca7ed51-923f-4dcf-a35a-55bd6713330c",
+        "z": 2899,
+        "vertices": [],
+        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "f7315f39-6fc6-4ae4-a120-cc70502967ad"
+        },
+        "target": {
+          "id": "8a66df1d-1c33-4135-bb11-634a2edc20b6",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 7.47509765625,
+              "dy": 21.703125,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_ACCIONAR_PORTON\n/tick = TICK_MAX;\nabriendo = true;\nraise EV_ACT_ABRIENDO_ON;\nraise EV_ACT_COMPLETAMENTE_CERRADO_OFF"
+              }
+            },
+            "position": {
+              "distance": 0.30947762165516285,
+              "offset": -51.0233154296875,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "d26adc4a-a530-4f75-a9ac-44e7f85ff76c",
+        "z": 2899,
+        "vertices": [
+          {
+            "x": -4690,
+            "y": -1028.1717596054077
+          }
+        ],
+        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "8a66df1d-1c33-4135-bb11-634a2edc20b6"
+        },
+        "target": {
+          "id": "8a66df1d-1c33-4135-bb11-634a2edc20b6",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 57.47509765625,
+              "dy": 9.703125,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "[tick >0]\n/tick--"
+              }
+            },
+            "position": {
+              "distance": 0.5477704228077533,
+              "offset": 28.077591252528343,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "3"
+              }
+            }
+          }
+        ],
+        "id": "980fec10-1018-48cd-a059-e45c49f92453",
+        "z": 2899,
+        "parent": "8a66df1d-1c33-4135-bb11-634a2edc20b6",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "8a66df1d-1c33-4135-bb11-634a2edc20b6"
+        },
+        "target": {
+          "id": "58ac61db-d713-45a4-b6c7-2f558d1aa4dd",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 73.9874267578125,
+              "dy": 13.428573608398438,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "[tick == 0]\n/raise EV_ACT_ABRIENDO_OFF"
+              }
+            },
+            "position": {
+              "distance": 0.5667334558000862,
+              "offset": -19.73642851675182,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "d3446726-0fc2-4d88-829b-f06314aa921d",
+        "z": 2899,
+        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "8f4c816a-29cd-42dc-9c60-2287f7a616ef"
+        },
+        "target": {
+          "x": -3941,
+          "y": -783,
+          "id": "0f4b0a04-0eb0-4333-a08c-ec9284e33e17",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 1345.02490234375,
+              "dy": 862.875,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_MENU"
+              }
+            },
+            "position": {}
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "0d258f19-8532-4b9a-a0b3-4cd7bf2b0b45",
+        "z": 2899,
+        "parent": "6e82437d-7cb7-4393-928d-b844bce30d17",
+        "vertices": [],
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "82887126-7e2f-44d3-82f7-afb9063fef2f"
+        },
+        "target": {
+          "x": -5348,
+          "y": -1644,
+          "id": "0f4b0a04-0eb0-4333-a08c-ec9284e33e17",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 350,
+              "dy": 106.5,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {},
+            "position": {}
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "3bccd32c-58e1-4bb5-9024-dc4c78648002",
+        "z": 2899,
+        "parent": "6e82437d-7cb7-4393-928d-b844bce30d17",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "0f4b0a04-0eb0-4333-a08c-ec9284e33e17"
+        },
+        "target": {
+          "x": -3310,
+          "y": -1058,
+          "id": "8f4c816a-29cd-42dc-9c60-2287f7a616ef",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 22,
+              "dy": 684,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_MENU"
+              }
+            },
+            "position": {}
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "35e6b580-81b1-4727-89bf-428d96d70066",
+        "z": 2899,
+        "parent": "6e82437d-7cb7-4393-928d-b844bce30d17",
+        "attrs": {}
+      },
+      {
+        "type": "Region",
+        "position": {
+          "x": -1531,
           "y": 756
         },
         "size": {
@@ -7347,7 +6845,7 @@
         "embedable": true,
         "linkable": true,
         "id": "14eb10bc-990d-465b-80ac-689c7c82d871",
-        "z": 2719,
+        "z": 2900,
         "embeds": [
           "fad4fc9f-47e6-4eee-9f8c-3db46d9b91d1",
           "1c91c1ff-ca06-49e5-a6a8-582b79f8e791",
@@ -7375,7 +6873,7 @@
       {
         "type": "State",
         "position": {
-          "x": -1448,
+          "x": -1186,
           "y": 1021.25
         },
         "size": {
@@ -7387,7 +6885,7 @@
         "embedable": true,
         "linkable": true,
         "id": "ae83794e-8ee9-48ed-8530-7a5170e3dc49",
-        "z": 2720,
+        "z": 2901,
         "parent": "14eb10bc-990d-465b-80ac-689c7c82d871",
         "attrs": {
           "name": {
@@ -7400,7 +6898,7 @@
       {
         "type": "State",
         "position": {
-          "x": -1068.4874954223633,
+          "x": -806.4874954223633,
           "y": 880
         },
         "size": {
@@ -7412,7 +6910,7 @@
         "embedable": true,
         "linkable": true,
         "id": "d66797fd-fa14-48d4-80a7-19fd07503833",
-        "z": 2721,
+        "z": 2902,
         "embeds": [
           "0614dcfe-44e1-472f-942d-1cc72002b89b"
         ],
@@ -7428,7 +6926,7 @@
       {
         "type": "State",
         "position": {
-          "x": -719.987434387207,
+          "x": -457.98743438720703,
           "y": 978
         },
         "size": {
@@ -7440,7 +6938,7 @@
         "embedable": true,
         "linkable": true,
         "id": "b77f1e03-7075-4857-9b7a-b9b39e8eef6c",
-        "z": 2722,
+        "z": 2903,
         "parent": "14eb10bc-990d-465b-80ac-689c7c82d871",
         "attrs": {
           "name": {
@@ -7453,7 +6951,7 @@
       {
         "type": "Note",
         "position": {
-          "x": -1721,
+          "x": -1459,
           "y": 804
         },
         "size": {
@@ -7463,7 +6961,7 @@
         "angle": 0,
         "linkable": false,
         "id": "f17134fb-bb13-4a26-ab08-bbb244ac6875",
-        "z": 2723,
+        "z": 2904,
         "parent": "14eb10bc-990d-465b-80ac-689c7c82d871",
         "attrs": {
           "label": {
@@ -7488,7 +6986,7 @@
       {
         "type": "State",
         "position": {
-          "x": -1087.9874954223633,
+          "x": -825.9874954223633,
           "y": 1146.5
         },
         "size": {
@@ -7500,7 +6998,7 @@
         "embedable": true,
         "linkable": true,
         "id": "7adcbb22-bbd6-438c-99e4-d0c5deed425f",
-        "z": 2724,
+        "z": 2905,
         "parent": "14eb10bc-990d-465b-80ac-689c7c82d871",
         "embeds": [
           "5831361c-6151-4af6-bce1-3c295d0e6068"
@@ -7516,7 +7014,7 @@
       {
         "type": "Entry",
         "position": {
-          "x": -1672.012565612793,
+          "x": -1410.012565612793,
           "y": 1058
         },
         "size": {
@@ -7528,7 +7026,7 @@
         "embedable": false,
         "linkable": true,
         "id": "ce73b553-5d7a-4f43-8cd2-9d063d441224",
-        "z": 2725,
+        "z": 2906,
         "embeds": [
           "dbd2ba2f-3dd0-43c8-a034-73b2d37b43fa"
         ],
@@ -7548,14 +7046,15 @@
           "height": 15
         },
         "position": {
-          "x": -1672.012565612793,
+          "x": -1410.012565612793,
           "y": 1073
         },
         "id": "dbd2ba2f-3dd0-43c8-a034-73b2d37b43fa",
-        "z": 2735,
+        "z": 2916,
         "parent": "ce73b553-5d7a-4f43-8cd2-9d063d441224",
         "attrs": {
           "label": {
+            "fill": "#333333",
             "refX": "50%",
             "textAnchor": "middle",
             "refY": "50%",
@@ -7614,7 +7113,7 @@
           }
         ],
         "id": "5831361c-6151-4af6-bce1-3c295d0e6068",
-        "z": 2736,
+        "z": 2917,
         "parent": "7adcbb22-bbd6-438c-99e4-d0c5deed425f",
         "attrs": {}
       },
@@ -7669,10 +7168,10 @@
           }
         ],
         "id": "e299c5bb-e0f2-4e0a-b77b-75cbca327b90",
-        "z": 2736,
+        "z": 2917,
         "vertices": [
           {
-            "x": -716,
+            "x": -454,
             "y": 1232
           }
         ],
@@ -7730,13 +7229,68 @@
           }
         ],
         "id": "1c91c1ff-ca06-49e5-a6a8-582b79f8e791",
-        "z": 2736,
+        "z": 2917,
         "vertices": [
           {
-            "x": -728,
+            "x": -466,
             "y": 1196.43
           }
         ],
+        "parent": "14eb10bc-990d-465b-80ac-689c7c82d871",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "d66797fd-fa14-48d4-80a7-19fd07503833"
+        },
+        "target": {
+          "id": "b77f1e03-7075-4857-9b7a-b9b39e8eef6c",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 73.9874267578125,
+              "dy": 13.428573608398438,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_BTN_MENU_DOWN [tick == 0]\n/  raise EV_SYS_MENU"
+              }
+            },
+            "position": {
+              "distance": 0.6723305193944689,
+              "offset": -33.69798278808594,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "227f936e-02c3-40c6-9953-092de844fe0e",
+        "z": 2917,
         "parent": "14eb10bc-990d-465b-80ac-689c7c82d871",
         "attrs": {}
       },
@@ -7791,177 +7345,18 @@
           }
         ],
         "id": "0614dcfe-44e1-472f-942d-1cc72002b89b",
-        "z": 2736,
+        "z": 2917,
         "vertices": [
           {
-            "x": -952,
+            "x": -690,
             "y": 842
           },
           {
-            "x": -1011.9999694824219,
+            "x": -749.9999694824219,
             "y": 842
           }
         ],
         "parent": "d66797fd-fa14-48d4-80a7-19fd07503833",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "d66797fd-fa14-48d4-80a7-19fd07503833"
-        },
-        "target": {
-          "id": "b77f1e03-7075-4857-9b7a-b9b39e8eef6c",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 73.9874267578125,
-              "dy": 13.428573608398438,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_BTN_MENU_DOWN [tick == 0]\n/  raise EV_SYS_MENU"
-              }
-            },
-            "position": {
-              "distance": 0.6723305193944689,
-              "offset": -33.69798278808594,
-              "angle": 0
-            }
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "1"
-              }
-            }
-          }
-        ],
-        "id": "227f936e-02c3-40c6-9953-092de844fe0e",
-        "z": 2736,
-        "parent": "14eb10bc-990d-465b-80ac-689c7c82d871",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "ce73b553-5d7a-4f43-8cd2-9d063d441224"
-        },
-        "target": {
-          "id": "ae83794e-8ee9-48ed-8530-7a5170e3dc49",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 31.9874267578125,
-              "dy": 43.75,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {},
-            "position": {}
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "1"
-              }
-            }
-          }
-        ],
-        "id": "fad4fc9f-47e6-4eee-9f8c-3db46d9b91d1",
-        "z": 2736,
-        "parent": "14eb10bc-990d-465b-80ac-689c7c82d871",
-        "attrs": {}
-      },
-      {
-        "type": "Transition",
-        "source": {
-          "id": "7adcbb22-bbd6-438c-99e4-d0c5deed425f"
-        },
-        "target": {
-          "id": "ae83794e-8ee9-48ed-8530-7a5170e3dc49",
-          "anchor": {
-            "name": "topLeft",
-            "args": {
-              "dx": 58,
-              "dy": 104.92857360839844,
-              "rotate": true
-            }
-          },
-          "priority": true
-        },
-        "router": {
-          "name": "orthogonal",
-          "args": {
-            "padding": 8
-          }
-        },
-        "connector": {
-          "name": "rounded"
-        },
-        "labels": [
-          {
-            "attrs": {
-              "text": {
-                "text": "EV_BTN_MENU_UP\n[tick == 0]"
-              }
-            },
-            "position": {}
-          },
-          {
-            "attrs": {
-              "root": {
-                "opacity": 1
-              },
-              "label": {
-                "text": "1"
-              }
-            }
-          }
-        ],
-        "id": "00d12154-8546-4bcc-825b-ca969f0456ab",
-        "z": 2736,
-        "parent": "14eb10bc-990d-465b-80ac-689c7c82d871",
-        "vertices": [
-          {
-            "x": -1251,
-            "y": 1196
-          }
-        ],
         "attrs": {}
       },
       {
@@ -8015,13 +7410,117 @@
           }
         ],
         "id": "672b1153-ceeb-4a5d-ae29-73c0293f5371",
-        "z": 2736,
+        "z": 2917,
         "vertices": [
           {
-            "x": -1228,
+            "x": -966,
             "y": 950
           }
         ],
+        "parent": "14eb10bc-990d-465b-80ac-689c7c82d871",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "7adcbb22-bbd6-438c-99e4-d0c5deed425f"
+        },
+        "target": {
+          "id": "ae83794e-8ee9-48ed-8530-7a5170e3dc49",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 58,
+              "dy": 104.92857360839844,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_BTN_MENU_UP\n[tick == 0]"
+              }
+            },
+            "position": {}
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "00d12154-8546-4bcc-825b-ca969f0456ab",
+        "z": 2917,
+        "parent": "14eb10bc-990d-465b-80ac-689c7c82d871",
+        "vertices": [
+          {
+            "x": -989,
+            "y": 1196
+          }
+        ],
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "ce73b553-5d7a-4f43-8cd2-9d063d441224"
+        },
+        "target": {
+          "id": "ae83794e-8ee9-48ed-8530-7a5170e3dc49",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 31.9874267578125,
+              "dy": 43.75,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {},
+            "position": {}
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "fad4fc9f-47e6-4eee-9f8c-3db46d9b91d1",
+        "z": 2917,
         "parent": "14eb10bc-990d-465b-80ac-689c7c82d871",
         "attrs": {}
       },
@@ -8076,14 +7575,951 @@
           }
         ],
         "id": "1ff76e16-53ff-4baa-9189-a79cfac73451",
-        "z": 2736,
+        "z": 2917,
         "vertices": [
           {
-            "x": -1393,
+            "x": -1131,
             "y": 917.4299999999998
           }
         ],
         "parent": "14eb10bc-990d-465b-80ac-689c7c82d871",
+        "attrs": {}
+      },
+      {
+        "type": "State",
+        "position": {
+          "x": -4161.857681274414,
+          "y": -844.9999446868896
+        },
+        "size": {
+          "width": 127,
+          "height": 103.5
+        },
+        "angle": 0,
+        "fixedRatio": false,
+        "embedable": true,
+        "linkable": true,
+        "id": "bfcaec29-6c86-413c-bf36-d477c7e766af",
+        "z": 2919,
+        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
+        "attrs": {
+          "name": {
+            "text": "ST_PORTON_FRENADO",
+            "fill": "#555555",
+            "fontSize": 12
+          }
+        }
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "8a66df1d-1c33-4135-bb11-634a2edc20b6"
+        },
+        "target": {
+          "id": "bfcaec29-6c86-413c-bf36-d477c7e766af",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 83.47509765625,
+              "dy": 22.0185546875,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_ACCIONAR_PORTON [tick>0]\n/raise EV_ACT_ABRIENDO_OFF"
+              }
+            },
+            "position": {
+              "distance": 0.43364431211015225,
+              "offset": -117.00008789062485,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "2"
+              }
+            }
+          }
+        ],
+        "id": "bd909b94-eb44-4c25-9039-d3c580c0952c",
+        "z": 2920,
+        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "9dd97b1b-86cf-4354-92ab-f506da620b0b",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 174.3955078125,
+              "dy": 14.375,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "target": {
+          "id": "bfcaec29-6c86-413c-bf36-d477c7e766af",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 124.3955078125,
+              "dy": 53.078125,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_ACCIONAR_PORTON [tick>0]\n/raise EV_ACT_CERRANDO_OFF"
+              }
+            },
+            "position": {
+              "distance": 0.6110282427880845,
+              "offset": 111.658203125,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "3"
+              }
+            }
+          }
+        ],
+        "id": "2eb8fade-ba37-4532-a821-a634a4ec460f",
+        "z": 2920,
+        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
+        "vertices": [
+          {
+            "x": -3960.462303161621,
+            "y": -574.8749446868896
+          },
+          {
+            "x": -3850.974868774414,
+            "y": -574.8749446868896
+          }
+        ],
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "bfcaec29-6c86-413c-bf36-d477c7e766af"
+        },
+        "target": {
+          "id": "9dd97b1b-86cf-4354-92ab-f506da620b0b",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 158.8828125,
+              "dy": 5.57818603515625,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_AUTO_DEBAJO_OFF\n/raise EV_ACT_CERRANDO_ON"
+              }
+            },
+            "position": {
+              "distance": 0.28152324852723176,
+              "offset": -99.00001953125002,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "3"
+              }
+            }
+          }
+        ],
+        "id": "d596b3d8-70f7-440d-877f-1645e91d68b7",
+        "z": 2920,
+        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "bfcaec29-6c86-413c-bf36-d477c7e766af"
+        },
+        "target": {
+          "id": "8a66df1d-1c33-4135-bb11-634a2edc20b6",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 26.47509765625,
+              "dy": 93.703125,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_ACCIONAR_PORTON [abriendo == false]\n/abriendo =true;\nraise EV_ACT_ABRIENDO_ON"
+              }
+            },
+            "position": {
+              "distance": 0.6274505016850486,
+              "offset": -160,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "2"
+              }
+            }
+          }
+        ],
+        "id": "02db73d2-8a67-4681-afc1-2e177e1528b7",
+        "z": 2920,
+        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "bfcaec29-6c86-413c-bf36-d477c7e766af"
+        },
+        "target": {
+          "id": "9dd97b1b-86cf-4354-92ab-f506da620b0b",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 18.85791015625,
+              "dy": 14,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_ACCIONAR_PORTON \n[abriendo == true && auto_debajo ==false]\n/abriendo = false;\nraise EV_ACT_CERRANDO_ON"
+              }
+            },
+            "position": {
+              "distance": 0.5606112035448683,
+              "offset": 157.2763741183322,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "2b30eb57-e2c2-4f46-9520-9aaca0dd303b",
+        "z": 2920,
+        "vertices": [
+          {
+            "x": -4323,
+            "y": -792
+          }
+        ],
+        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "9dd97b1b-86cf-4354-92ab-f506da620b0b",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 122.85791015625,
+              "dy": -0.75006103515625,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "target": {
+          "id": "bfcaec29-6c86-413c-bf36-d477c7e766af",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 68.85791015625,
+              "dy": 84.95306396484375,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_AUTO_DEBAJO_ON\n/raise EV_ACT_CERRANDO_OFF"
+              }
+            },
+            "position": {
+              "distance": 0.7561507958087189,
+              "offset": -97.99999999999999,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "4"
+              }
+            }
+          }
+        ],
+        "id": "44560611-2d0c-4225-8f86-4d7742ca29d7",
+        "z": 2921,
+        "vertices": [],
+        "parent": "e667c0e5-ce25-439a-941c-d8f8a1136c74",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "c6a4d30a-0807-4f4d-95c3-65a0e3eff115",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 143,
+              "dy": 104.87493896484375,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "target": {
+          "id": "c6a4d30a-0807-4f4d-95c3-65a0e3eff115",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 132,
+              "dy": 48.87493896484375,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_NEXT [tmpo_debajo >0]\n/tmpo_debajo --"
+              }
+            },
+            "position": {
+              "distance": 0.5077285059866399,
+              "offset": 111.926025390625,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "ab845f2a-cc6e-451d-9092-c0a38baf1fe7",
+        "z": 2923,
+        "vertices": [
+          {
+            "x": -1233,
+            "y": -651
+          }
+        ],
+        "parent": "c6a4d30a-0807-4f4d-95c3-65a0e3eff115",
+        "attrs": {}
+      },
+      {
+        "type": "State",
+        "position": {
+          "x": -1840,
+          "y": -984.8124446868896
+        },
+        "size": {
+          "width": 166,
+          "height": 131.875
+        },
+        "angle": 0,
+        "fixedRatio": false,
+        "embedable": true,
+        "linkable": true,
+        "id": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
+        "z": 2928,
+        "embeds": [
+          "f5dc0d2b-4a3f-4d2d-8289-35d92175e0ab",
+          "5dc1ee54-955a-442b-bb0d-ce8cfdce8e5b"
+        ],
+        "parent": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
+        "attrs": {
+          "name": {
+            "text": "ST_MENU_SETUP",
+            "fill": "#555555",
+            "fontSize": 12
+          }
+        }
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "3ea82168-f16d-4d13-9dd6-31e551afb05a"
+        },
+        "target": {
+          "id": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 39.5069580078125,
+              "dy": 76.89639282226562,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_ENTER"
+              }
+            },
+            "position": {
+              "distance": 0.10860352125275916,
+              "offset": -14.004211425781252,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "42ae8579-f7c1-4d50-b81f-8841787c5b8c",
+        "z": 2929,
+        "vertices": [],
+        "parent": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "a217add9-69cb-4a16-a4f8-548ec34fe767"
+        },
+        "target": {
+          "id": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 113.416748046875,
+              "dy": 25.3154296875,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {},
+            "position": {}
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "4bdf86dc-2012-437f-90fa-8b0047a8cd21",
+        "z": 2929,
+        "parent": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "c6a4d30a-0807-4f4d-95c3-65a0e3eff115",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 10,
+              "dy": 106,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "target": {
+          "id": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 96.416748046875,
+              "dy": 88.3154296875,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_ENTER"
+              }
+            },
+            "position": {
+              "distance": 0.2291946157458251,
+              "offset": 16,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "2"
+              }
+            }
+          }
+        ],
+        "id": "2bf14f02-a9c0-4d36-a32b-5db321c21f52",
+        "z": 2929,
+        "vertices": [
+          {
+            "x": -1663.17,
+            "y": -593.87
+          }
+        ],
+        "parent": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 8,
+              "dy": 82.25,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "target": {
+          "id": "3ea82168-f16d-4d13-9dd6-31e551afb05a",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 67,
+              "dy": 19.89639663696289,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_ENTER [submenu == 1] /tmpo_espera=TMPO_ESPERA_MAX"
+              }
+            },
+            "position": {
+              "distance": 0.441039834003383,
+              "offset": 133.61097041140468,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "3"
+              }
+            }
+          }
+        ],
+        "id": "e8bdce38-ea9f-4f26-a5dc-ecce46407552",
+        "z": 2929,
+        "vertices": [],
+        "parent": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 156.416748046875,
+              "dy": 84.3154296875,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "target": {
+          "id": "c6a4d30a-0807-4f4d-95c3-65a0e3eff115",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 76,
+              "dy": 22.89639663696289,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_ENTER [submenu == 2] /tmpo_debajo =TMPO_DEBAJO_MAX"
+              }
+            },
+            "position": {
+              "distance": 0.7968471154281697,
+              "offset": -34.578482104500026,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "4"
+              }
+            }
+          }
+        ],
+        "id": "5eb87323-b9e5-4b62-8e8c-a4eae2af4687",
+        "z": 2929,
+        "vertices": [
+          {
+            "x": -1496,
+            "y": -778.6249446868896
+          }
+        ],
+        "parent": "8c850b9f-8ffb-4bbe-b11f-15ae08492e4d",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 11.5833740234375,
+              "dy": 61.37493896484375,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "target": {
+          "id": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 3.5833740234375,
+              "dy": 22.37493896484375,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_NEXT [submenu<submenu_max]\n/submenu=submenu+1"
+              }
+            },
+            "position": {
+              "distance": 0.6629216016863511,
+              "offset": -39.87043118998729,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "1"
+              }
+            }
+          }
+        ],
+        "id": "5dc1ee54-955a-442b-bb0d-ce8cfdce8e5b",
+        "z": 2929,
+        "vertices": [
+          {
+            "x": -1898.4166641235352,
+            "y": -949.4375
+          }
+        ],
+        "parent": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
+        "attrs": {}
+      },
+      {
+        "type": "Transition",
+        "source": {
+          "id": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 156.5833740234375,
+              "dy": 73.37493896484375,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "target": {
+          "id": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
+          "anchor": {
+            "name": "topLeft",
+            "args": {
+              "dx": 168.5069580078125,
+              "dy": 27.5,
+              "rotate": true
+            }
+          },
+          "priority": true
+        },
+        "router": {
+          "name": "orthogonal",
+          "args": {
+            "padding": 8
+          }
+        },
+        "connector": {
+          "name": "rounded"
+        },
+        "labels": [
+          {
+            "attrs": {
+              "text": {
+                "text": "EV_SYS_NEXT [submenu==submenu_max]\n/submenu=1"
+              }
+            },
+            "position": {
+              "distance": 0.5460686650106277,
+              "offset": 135.0096435546875,
+              "angle": 0
+            }
+          },
+          {
+            "attrs": {
+              "root": {
+                "opacity": 1
+              },
+              "label": {
+                "text": "2"
+              }
+            }
+          }
+        ],
+        "id": "f5dc0d2b-4a3f-4d2d-8289-35d92175e0ab",
+        "z": 2930,
+        "vertices": [
+          {
+            "x": -1598,
+            "y": -957.31
+          }
+        ],
+        "parent": "f78a822c-e00c-4e71-9dcf-1204648f50aa",
         "attrs": {}
       }
     ]
