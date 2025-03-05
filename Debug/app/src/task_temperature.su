@@ -1,0 +1,6 @@
+../app/src/task_temperature.c:88:6:task_adc_init	24	static,ignoring_inline_asm
+../app/src/task_temperature.c:100:6:task_adc_update	24	static
+../app/src/task_temperature.c:106:6:test3_tick_micro	24	static
+../app/src/task_temperature.c:139:6:test3_tick_ambiente	24	static
+../app/src/task_temperature.c:178:6:HAL_ADC_ConvCpltCallback	16	static
+../app/src/task_temperature.c:197:10:promedio	24	static

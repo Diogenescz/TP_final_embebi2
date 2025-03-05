@@ -1,0 +1,35 @@
+  task_temperature.c (task_temperature.h, task_temperature_attribute.h) 
+  	Endless loops, which execute tasks with fixed computing time. This 
+   	sequential execution is only deviated from when an interrupt event occurs.
+  
+  task_temperature_interface.c (task_temperature_interface.h)
+   Non-Blocking Code
+
+...
+
+Inicialización del ADC:
+
+-Habilitar el ADC en el archivo .ioc.
+	*Se necesitan dos canales, para la temperatura ambiente y temperatura, en este caso se habilitan los dos ADC (ADC1 y ADC2)
+	
+-Habilitar el sensado de la temperatura
+	*Para el ADC1 se habilita el sensado, para obtener la temperatura del MCU
+
+-Habilitar las interrupciones globales en la pestaña NVIC
+	*Para que el código sea no bloqueante, se sensa la temperatura utilizando interrupciones.
+	
+	
+	
+En la función task_adc_update(), se actualiza la temperatura ambiente y del microcontrolador llamando
+ a las funciones  test3_tick_micro() y  test3_tick_ambiente().
+ 
+ En ambas funciones al detectar una interrupción, se cargan los valores en un vector el cual luego se promedia para disminuir el efecto del 
+ ruiedo en las mediciones. Luego, apartir de este promedio se obtiene la temperatura en Celsius y se carga en una estructura con la funcion 
+ cargar_valor_sensor() pasando le el ID de la temperatura que se quiere cargar (SENSOR_AMBIENTE o SENSOR_MICRO) y la temperatura calculada.
+ 
+ Luego, es posible acceder a estos valores calculados desde otros archivos utilizando la funcion get_valor_sensor(), especificando el ID de
+ la temperatura requerida.
+ 
+
+	
+	

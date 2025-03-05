@@ -1,0 +1,2 @@
+../app/src/task_temperature_interface.c:14:6:cargar_valor_sensor	2
+../app/src/task_temperature_interface.c:22:7:get_valor_sensor	1

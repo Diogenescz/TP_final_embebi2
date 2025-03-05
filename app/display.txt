@@ -1,0 +1,22 @@
+  display.c (display.h) 
+   Non-Blocking & Update By Time Code -> Display Modeling
+  
+...
+
+
+Inicialización del display:
+1) Definir PINS en archivo .ioc
+	-Elegir Pin name, chequear que no esté ocupado o bloqueado con otra tarea.
+	-GPIO output level "Low"
+	-GPIO mode "Output Push-Pull"
+	-GPIO Pull-up/Pull-down "Pull-down"
+	-Maximum output speed "Low"
+	-User label "[Pin name]"
+
+En task_system.c se llama "displayInit(DISPLAY_CONNECTION_GPIO_4BITS);" para inicializar la conexión de pines. 
+	-Dentro tiene la función "displayCodeWrite();" que llama a su ver "displayPinWrite();". Ejecuta DISPLAY_CONNECTION_GPIO_4BITS:
+	Escribe los 6 pins definidos como salida en el .ioc Así podrá conectarse con la placa.
+
+Con las funciones "displayCharPositionWrite(0, 0);" y "displayStringWrite("D=DEBAJO,A=T_AMB");" se escribe
+en el display, simulando la batalla naval. Se envía donde iniciará el string que se envía.
+Nosotros usamos un LCD display de 2 líneas x 16 caracteres, en modo 4 bits.
