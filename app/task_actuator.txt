@@ -1,0 +1,30 @@
+  task_actuator.c (task_actuator.h, task_actuator_attribute.h) 
+   Non-Blocking & Update By Time Code -> Actuator Modeling
+
+  task_actuator_interface.c (task_actuator_interface.h)
+   Non-Blocking Code
+
+...
+
+Inicialización de actuadores: 
+1) Definir PINS en archivo .ioc
+	-Elegir Pin name, chequear que no esté ocupado o bloqueado con otra tarea.
+	-GPIO output level "Low"
+	-GPIO mode "Output Push-Pull"
+	-GPIO Pull-up/Pull-down "Pull-down"
+	-Maximum output speed "Low"
+	-User label "[Pin name]"
+2) Agregar actuadores en "task_actuator_attribute.h" al enum task_actuator_id.
+3) Agregar actuadores en "task_actuator.c" en task_actuator_cfg_list[], considerando
+	-El id definido en el punto 2) para cada uno
+	-El puerto, pin, GPIO_PIN_SET y GPIO_PIN_RESET definidos en "board.h" (del .ioc)
+4) Agregar actuadores en "task_actuator.c" en task_actuator_dta_list[] para la inicialización de la lista. El LED portón cerrado inicializa encendido.
+
+Función task_actuator_init()
+Inicializa las dos listas que armamos antes. Define los pines para cada actuador y el estado inicial.
+
+Función task_actuator_update()
+La flag [b_time_update_required] se setea en True cuando el contador de tick es mayor a 0, entre al while para accionar.
+Recorriendo por cada actuador, chequea su flag por si hay una actualización para entrar al case.
+Dentro cambia el estado del pin según el estado que transiciona, y baja la flag de update. 
+La flag es la relación de actuadores con el sistema, con la función "put_event_task_actuator(EV, ID_ACTUATOR)". 

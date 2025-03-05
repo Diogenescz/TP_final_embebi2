@@ -1,0 +1,38 @@
+ task_system.c (task_system.h, task_system_attribute.h) 
+   Non-Blocking Code -> System Modeling
+  
+  task_system_interface.c (task_system_interface.h)
+   Non-Blocking Code
+
+...
+
+Inicialización del sistema:
+1) Cargo los estados del sistema en "task_system_attribute.h" dentro del enum task_system_st
+2) Cargo los eventos para transicionar entre estados en "task_system_attribute.h"  dentro del enum task_system_ev
+3) Cargo guardas y variables que necesite en las estructuras (también "task_system_attribute.h")
+task_system_dta_t; se guardan
+	-estado del sistema
+	-estado del sistema anterior (para volver del menú)
+	-el evento que carga con get_event_task_system() a partir de un sensor
+	-guarda de auto_debajo 
+	-guarda de abriendo
+task_menu_parameters_t; para imprimir en el display (información)
+	-submenu para saber si varío tiempo de espera, o tiempo debajo
+	-tiempo de espera
+	-tiempo debajo
+-temperatura del micro
+-temperatura ambiente
+-líneas del display
+
+En el archivo "task_system.c"
+Función task_system_init()
+-Inicializo la fila de tasks para la interfaz de sistema con sensor y actuador. 
+-task_system_dta y task_menu_parameters se inicializan FUERA.
+-Inicializo el display.
+
+Función task_system_update()
+-Guardamos el valor de temperatura ambiente y del micro.
+-Se pone [b_time_update_required] en True para entrar al while.
+-Guarda el evento de get_event_task_system();  (por el enum de eventos del sistema lo reconoce).
+-Entra en el switch de estados del sistema.
+*Dadas ciertas condiciones, activa actuadores con put_event_task_actuator(); y imprime en display cargando los nuevos valores con snprintf.

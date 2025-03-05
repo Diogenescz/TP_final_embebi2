@@ -1,0 +1,2 @@
+../app/src/task_actuator.c:98:6:task_actuator_init	40	static,ignoring_inline_asm
+../app/src/task_actuator.c:143:6:task_actuator_update	32	static,ignoring_inline_asm

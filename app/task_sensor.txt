@@ -1,0 +1,27 @@
+task_sensor.c (task_sensor.h, task_sensor_attribute.h) 
+   Non-Blocking & Update By Time Code -> Sensor Modeling
+  
+...
+
+Inicialización de sensores: 
+1) Definir PINS en archivo .ioc
+	-Elegir Pin name, chequear que no esté ocupado o bloqueado con otra tarea.
+	-GPIO output level "n/a"
+	-GPIO mode "Input mode"
+	-GPIO Pull-up/Pull-down "Pull-up"
+	-Maximum output speed "n/a"
+	-User label "[Pin name]"
+2) Agregar sensores en "task_sensor_attribute.h" al enum task_sensor_id.
+3) Agregar sensores en "task_sensor.c" en task_sensor_cfg_list[], considerando
+	-El id definido en el punto 2) para cada uno
+	-El puerto, pin, GPIO_PIN_SET y GPIO_PIN_RESET definidos en "board.h" (del .ioc)
+4) Agregar sensores en "task_sensor.c" en task_sensor_dta_list[] para la inicialización de la lista.
+
+Función task_sensor_init()
+	Inicializa las dos listas que armamos antes. Define los pines para cada sensor y el estado inicial.
+
+Función task_sensor_update()
+	La flag [b_time_update_required] se setea en True cuando el contador de tick es mayor a 0, entre al while para accionar.
+	Recorriendo por cada actuador, chequea si está presionado (lee el PIN), para poner el evento EV_BTN_XX_DOWN, sino EV_BTN_XX_UP. 
+	Quitamos el rebote del botón por software agregando los estados FALLING y RISING.
+	A partir de los sensores se cargan tareas en actuadores a través del sistema con la función "put_event_task_system(SIGNAL UP/SIGNAL DOWN)"
